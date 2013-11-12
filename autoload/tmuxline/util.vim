@@ -1,0 +1,91 @@
+" The MIT License (MIT)
+"
+" Copyright (c) 2013 Evgeni Kolev
+
+fun! tmuxline#util#tmux_color_attr(fg, bg, attr)
+  let fg = tmuxline#util#normalize_color(a:fg)
+  let bg = tmuxline#util#normalize_color(a:bg)
+  let color  =  'fg=' . fg
+  let color .= ',bg=' . bg
+  let color .= len( a:attr ) ? ',' : ''
+  let color .= a:attr
+  return '#[' . color . ']'
+endfun
+
+fun! tmuxline#util#normalize_color(color)
+  " prepend 'colour' to numbers
+  return a:color =~ '^\d\+$' ? "colour" . a:color : a:color
+endfun
+
+fun! tmuxline#util#get_color_from_theme(color_name, theme)
+  if has_key(a:theme, a:color_name)
+    let color_definition = a:theme[a:color_name]
+  else
+    let downgraded_color_name = substitute(a:color_name, '\..*', '', '')
+    if has_key(a:theme, downgraded_color_name)
+      echohl WarningMsg
+      echo "tmuxline warning: Using color '" . downgraded_color_name . "' instead of '" . a:color_name . "'"
+      echohl None
+      let color_definition = a:theme[downgraded_color_name]
+    else
+      throw "tmuxline error: Color definition '" . a:color_name . "' not found in theme"
+    endif
+  endif
+
+  let fg = color_definition[0]
+  let bg = color_definition[1]
+  let attr = get(color_definition, 2, '')
+  return tmuxline#util#tmux_color_attr(fg, bg, attr)
+endfun
+
+fun! tmuxline#util#create_bar_from_hash(hash) abort
+  let bar = tmuxline#new()
+
+  for key in filter(['a','b','c'], 'has_key(a:hash, v:val)')
+    let value = a:hash[key]
+    let parts = type(value) == type([]) ? value : [value]
+    call map(parts, 'escape(v:val, "\"")')
+    let parts_code = map(copy(parts), '"call bar.left.add(\"" . key . "\", \"" . v:val . "\")"')
+    exec join(parts_code, '| call bar.left.add_left_alt_sep() |')
+    call bar.left.add_left_sep()
+    unlet value
+  endfor
+
+  for key in filter(['x','y','z'], 'has_key(a:hash, v:val)')
+    let value = a:hash[key]
+    let parts = type(value) == type([]) ? value : [value]
+    call map(parts, 'escape(v:val, "\"")')
+    let parts_code = map(copy(parts), '"call bar.right.add(\"" . key . "\", \"" . v:val . "\")"')
+    call bar.right.add_right_sep()
+    exec join(parts_code, '| call bar.right.add_right_alt_sep() |')
+    unlet value
+  endfor
+
+  for key in filter(['win'], 'has_key(a:hash, v:val)')
+    let value = a:hash[key]
+    let parts = type(value) == type([]) ? value : [value]
+    call map(parts, 'escape(v:val, "\"")')
+    let parts_code = map(copy(parts), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
+    exec join(parts_code, '| call bar.win.add_left_alt_sep() |')
+    call bar.win.add_left_sep()
+    unlet value
+  endfor
+
+  for key in filter(['cwin'], 'has_key(a:hash, v:val)')
+    let value = a:hash[key]
+    let parts = type(value) == type([]) ? value : [value]
+    call map(parts, 'escape(v:val, "\"")')
+    let parts_code = map(copy(parts), '"call bar.cwin.add(\"" . key . "\", \"" . v:val . "\")"')
+    call bar.cwin.add_left_sep()
+    exec join(parts_code, '| call bar.cwin.add_left_alt_sep() |')
+    call bar.cwin.add_left_sep()
+    unlet value
+  endfor
+
+  for key in filter(['cwin_justify', 'left_length', 'right_length'], 'has_key(a:hash, v:val)')
+    let bar[key] = a:hash[key]
+  endfor
+
+  return bar
+endfun
+
