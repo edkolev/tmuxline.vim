@@ -1,3 +1,6 @@
+
+" extract colors from airline's global variables
+" XXX patchy. maybe there's a cleaner way to integrate with airline
 function! tmuxline#themes#airline#get() abort
     let colors = {}
 
@@ -19,5 +22,5 @@ function! tmuxline#themes#airline#get() abort
 endfunc
 
 fun! s:airline_to_tmuxline(air)
-    return [ 'colour' . a:air[2], 'colour' . a:air[3] ]
+    return [ a:air[2], a:air[3] ]
 endfun

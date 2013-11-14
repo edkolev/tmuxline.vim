@@ -37,7 +37,7 @@ fun! s:builder.build(theme, separators) abort
     let space = a:separators.space
     for [type, style, text] in self._contents
         if pending_separator
-            let line .= self._make_separator(last_style, style, pending_separator, a:separators, a:theme)
+            let line .= s:make_separator(last_style, style, pending_separator, a:separators, a:theme)
             let pending_separator = ''
         endif
         if type == s:TEXT
@@ -61,14 +61,14 @@ fun! s:builder.build(theme, separators) abort
     endfor
 
     if pending_separator
-        let line .= self._make_separator(last_style, 'bg', pending_separator, a:separators, a:theme)
+        let line .= s:make_separator(last_style, 'bg', pending_separator, a:separators, a:theme)
     endif
     return line
 endfun
 
-fun! s:builder._make_separator(from_style, to_style, separator_type, separators, theme)
-    let from_color = a:theme[a:from_style]
-    let to_color = a:theme[a:to_style]
+fun! s:make_separator(from_style, to_style, separator_type, separators, theme) abort
+    let from_color = tmuxline#util#get_color_definition_from_theme(a:from_style, a:theme)
+    let to_color = tmuxline#util#get_color_definition_from_theme(a:to_style, a:theme)
     let [fg, bg] = a:separator_type == s:LEFT_SEP ? [ from_color[1], to_color[1] ] : [ to_color[1], from_color[1] ]
     let separator = a:separator_type == s:LEFT_SEP ? a:separators.left : a:separators.right
     return tmuxline#util#tmux_color_attr(fg, bg, '') . separator

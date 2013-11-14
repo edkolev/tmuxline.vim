@@ -1,3 +1,4 @@
+
 function! tmuxline#themes#default#get()
     return {
         \ 'a': [ 'white', 'brightyellow' ],

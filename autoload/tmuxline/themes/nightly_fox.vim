@@ -1,9 +1,5 @@
-" The MIT License (MIT)
-"
-" Copyright (c) 2013 Evgeni Kolev
 
 " inspired by http://paulrouget.com/e/myconf/
-
 function! tmuxline#themes#nightly_fox#get()
     return {
         \ 'a'       : [ 198, 16 ],

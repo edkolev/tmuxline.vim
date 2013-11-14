@@ -17,20 +17,24 @@ fun! tmuxline#util#normalize_color(color)
   return a:color =~ '^\d\+$' ? "colour" . a:color : a:color
 endfun
 
-fun! tmuxline#util#get_color_from_theme(color_name, theme)
+fun! tmuxline#util#get_color_definition_from_theme(color_name, theme)
   if has_key(a:theme, a:color_name)
-    let color_definition = a:theme[a:color_name]
+    return a:theme[a:color_name]
   else
     let downgraded_color_name = substitute(a:color_name, '\..*', '', '')
     if has_key(a:theme, downgraded_color_name)
       echohl WarningMsg
       echo "tmuxline warning: Using color '" . downgraded_color_name . "' instead of '" . a:color_name . "'"
       echohl None
-      let color_definition = a:theme[downgraded_color_name]
+      return a:theme[downgraded_color_name]
     else
       throw "tmuxline error: Color definition '" . a:color_name . "' not found in theme"
     endif
   endif
+endfun
+
+fun! tmuxline#util#get_color_from_theme(color_name, theme) abort
+  let color_definition = tmuxline#util#get_color_definition_from_theme(a:color_name, a:theme)
 
   let fg = color_definition[0]
   let bg = color_definition[1]
@@ -38,7 +42,26 @@ fun! tmuxline#util#get_color_from_theme(color_name, theme)
   return tmuxline#util#tmux_color_attr(fg, bg, attr)
 endfun
 
-fun! tmuxline#util#create_bar_from_hash(hash) abort
+fun! tmuxline#util#load_colors_from_theme(theme_name) abort
+    try
+      let colors = tmuxline#themes#{a:theme_name}#get()
+    catch
+      throw "tmuxline error: invalid theme \"" . a:theme_name . "\""
+    endtry
+    return colors
+endfun
+
+fun! tmuxline#util#load_line_from_preset(preset_name) abort
+    try
+      let line = tmuxline#presets#{a:preset_name}#get()
+    catch
+      throw "tmuxline error: invalid preset \"" . a:preset_name . "\""
+    endtry
+    return line
+endfun
+
+" XXX ugly. try to find a better way to create a tmuxline from a hash
+fun! tmuxline#util#create_line_from_hash(hash) abort
   let bar = tmuxline#new()
 
   for key in filter(['a','b','c'], 'has_key(a:hash, v:val)')
@@ -66,6 +89,7 @@ fun! tmuxline#util#create_bar_from_hash(hash) abort
     let parts = type(value) == type([]) ? value : [value]
     call map(parts, 'escape(v:val, "\"")')
     let parts_code = map(copy(parts), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
+    call bar.win.add_left_sep()
     exec join(parts_code, '| call bar.win.add_left_alt_sep() |')
     call bar.win.add_left_sep()
     unlet value

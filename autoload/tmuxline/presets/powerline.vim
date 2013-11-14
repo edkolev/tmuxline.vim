@@ -1,8 +1,5 @@
-" The MIT License (MIT)
-"
-" Copyright (c) 2013 Evgeni Kolev
 
-fun! tmuxline#presets#powerline_like#get()
+fun! tmuxline#presets#powerline#get()
     let bar = tmuxline#new()
 
     call bar.left.add('a', '#S')
@@ -26,7 +23,7 @@ fun! tmuxline#presets#powerline_like#get()
     call bar.cwin.add('cwin', '#W')
     call bar.cwin.add_left_sep()
 
-    let bar.cwin_justify = 'left'
+    let bar.set['status-justify'] = 'left'
 
     return bar
 endfun

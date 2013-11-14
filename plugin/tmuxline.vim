@@ -1,3 +1,6 @@
+" The MIT License (MIT)
+"
+" Copyright (c) 2013 Evgeni Kolev
 
 function! s:complete_themes_presets(A,L,P)
     let pre   = a:L[0 : a:P-1]
@@ -9,6 +12,6 @@ function! s:complete_themes_presets(A,L,P)
     return map(files, 'fnamemodify(v:val, ":t:r")')
 endfunction
 
-command! -nargs=* -bar -complete=customlist,<sid>complete_themes_presets Tmuxline call tmuxline#set_statusbar(<f-args>)
+command! -nargs=* -bar -complete=customlist,<sid>complete_themes_presets Tmuxline call tmuxline#set_statusline(<f-args>)
 command! -nargs=1 -bang -complete=file -bar TmuxlineSnapshot call tmuxline#snapshot(<f-args>, strlen("<bang>"))
 
