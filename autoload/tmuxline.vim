@@ -40,6 +40,9 @@ fun! tmuxline#new()
           \ 'status-left-length' : 100,
           \ 'status-right-length' : 100,
           \ 'status' : 'on',
+          \ 'status-right-attr' : 'none',
+          \ 'status-left-attr' : 'none',
+          \ 'status-attr' : 'none',
           \ 'status-utf8' : 'on'}
     let bar.setw = {
           \ 'window-status-separator' : ''}

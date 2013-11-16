@@ -16,7 +16,7 @@ function! tmuxline#themes#airline#get() abort
     let colors.z = deepcopy(colors.a)
 
     let colors.bg = deepcopy(colors.c)
-    let colors.win = deepcopy(colors.a)
+    let colors.win = deepcopy(colors.c)
     let colors.cwin = deepcopy(colors.b)
     return colors
 endfunc

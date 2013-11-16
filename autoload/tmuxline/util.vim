@@ -23,9 +23,9 @@ fun! tmuxline#util#get_color_definition_from_theme(color_name, theme)
   else
     let downgraded_color_name = substitute(a:color_name, '\..*', '', '')
     if has_key(a:theme, downgraded_color_name)
-      echohl WarningMsg
-      echo "tmuxline warning: Using color '" . downgraded_color_name . "' instead of '" . a:color_name . "'"
-      echohl None
+      " echohl WarningMsg
+      " echo "tmuxline warning: Using color '" . downgraded_color_name . "' instead of '" . a:color_name . "'"
+      " echohl None
       return a:theme[downgraded_color_name]
     else
       throw "tmuxline error: Color definition '" . a:color_name . "' not found in theme"
