@@ -63,9 +63,10 @@ endfun
 " XXX ugly. try to find a better way to create a tmuxline from a hash
 fun! tmuxline#util#create_line_from_hash(hash) abort
   let bar = tmuxline#new()
+  let hash = deepcopy(a:hash)
 
-  for key in filter(['a','b','c'], 'has_key(a:hash, v:val)')
-    let value = a:hash[key]
+  for key in filter(['a','b','c'], 'has_key(hash, v:val)')
+    let value = hash[key]
     let parts = type(value) == type([]) ? value : [value]
     call map(parts, 'escape(v:val, "\"")')
     let parts_code = map(copy(parts), '"call bar.left.add(\"" . key . "\", \"" . v:val . "\")"')
@@ -74,8 +75,8 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
     unlet value
   endfor
 
-  for key in filter(['x','y','z'], 'has_key(a:hash, v:val)')
-    let value = a:hash[key]
+  for key in filter(['x','y','z'], 'has_key(hash, v:val)')
+    let value = hash[key]
     let parts = type(value) == type([]) ? value : [value]
     call map(parts, 'escape(v:val, "\"")')
     let parts_code = map(copy(parts), '"call bar.right.add(\"" . key . "\", \"" . v:val . "\")"')
@@ -84,8 +85,8 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
     unlet value
   endfor
 
-  for key in filter(['win'], 'has_key(a:hash, v:val)')
-    let value = a:hash[key]
+  for key in filter(['win'], 'has_key(hash, v:val)')
+    let value = hash[key]
     let parts = type(value) == type([]) ? value : [value]
     call map(parts, 'escape(v:val, "\"")')
     let parts_code = map(copy(parts), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
@@ -95,8 +96,8 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
     unlet value
   endfor
 
-  for key in filter(['cwin'], 'has_key(a:hash, v:val)')
-    let value = a:hash[key]
+  for key in filter(['cwin'], 'has_key(hash, v:val)')
+    let value = hash[key]
     let parts = type(value) == type([]) ? value : [value]
     call map(parts, 'escape(v:val, "\"")')
     let parts_code = map(copy(parts), '"call bar.cwin.add(\"" . key . "\", \"" . v:val . "\")"')
@@ -106,8 +107,8 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
     unlet value
   endfor
 
-  for key in filter(['cwin_justify', 'left_length', 'right_length'], 'has_key(a:hash, v:val)')
-    let bar[key] = a:hash[key]
+  for key in filter(['cwin_justify', 'left_length', 'right_length'], 'has_key(hash, v:val)')
+    let bar[key] = hash[key]
   endfor
 
   return bar
