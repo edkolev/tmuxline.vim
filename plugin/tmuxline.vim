@@ -2,6 +2,10 @@
 "
 " Copyright (c) 2013 Evgeni Kolev
 
+if !strlen($TMUX) || !executable('tmux')
+  finish
+endif
+
 function! s:complete_themes_presets(A,L,P)
     let pre   = a:L[0 : a:P-1]
     let theme = matchstr(pre, '\S*\s\+\zs\(\S\+\)\ze\s')
