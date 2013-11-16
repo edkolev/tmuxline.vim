@@ -2,8 +2,7 @@
 
 Simple tmux statusline generator with support for powerline symbols and airline integration
 
-TODO screenshot
-TODO screenshot of nightly_fox
+![img](https://f.cloud.github.com/assets/1532071/1556058/d2347eea-4ea7-11e3-9393-660b2e2c143a.png)
 
 ## Features
 
@@ -46,7 +45,7 @@ tmuxline can extract colors from airline
 :Tmuxline airline
 ```
 
-TODO screenshot
+![img](https://f.cloud.github.com/assets/1532071/1556059/d24a5c42-4ea7-11e3-9965-c13418d889a1.png)
 
 ### Configuration
 
@@ -64,7 +63,8 @@ let g:tmuxline_preset = {
       \'z'    : '#H'}
 ```
 
-TODO screenshot
+![img](https://f.cloud.github.com/assets/1532071/1556060/d80f24a0-4ea7-11e3-97c2-0e5fd39dbf2b.png)
+
 
 tmux will replace #X and %X. Excerpts from tmux man page:
 ```
@@ -83,19 +83,19 @@ If the values of the hash `g:tmuxline_preset` hold an array, a powerline separat
 ```
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'win' : ['#I', '#W'],
-      \'cwin'  : ['#I', '#W', '#F'],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
       \'y'    : ['%R', '%a', '%Y'],
       \'z'    : '#H'}
 ```
 
-TODO screenshot
+![img](https://f.cloud.github.com/assets/1532071/1556061/d81ab112-4ea7-11e3-9be7-46e41cc47cef.png)
 
 tmux allows using any command in the statusline.
 ```
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime)'],
+      \'c'    : ['#(whoami)', '#(uptime | cud -d " " -f 1,2,3)'],
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W', '#F'],
       \'x'    : '#(date)',
@@ -103,7 +103,7 @@ let g:tmuxline_preset = {
       \'z'    : '#H'}
 ```
 
-TODO screenshot
+![img](https://f.cloud.github.com/assets/1532071/1556062/d82660ca-4ea7-11e3-9df3-4b084a992c0c.png)
 
 use `let g:tmuxline_powerline_separators = 0` to disable using powerline symbols
 
