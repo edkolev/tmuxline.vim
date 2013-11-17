@@ -43,21 +43,21 @@ fun! tmuxline#util#get_color_from_theme(color_name, theme) abort
 endfun
 
 fun! tmuxline#util#load_colors_from_theme(theme_name) abort
-    try
-      let colors = tmuxline#themes#{a:theme_name}#get()
-    catch
-      throw "tmuxline error: invalid theme \"" . a:theme_name . "\""
-    endtry
-    return colors
+  try
+    let colors = tmuxline#themes#{a:theme_name}#get()
+  catch
+    throw "tmuxline error: invalid theme \"" . a:theme_name . "\""
+  endtry
+  return colors
 endfun
 
 fun! tmuxline#util#load_line_from_preset(preset_name) abort
-    try
-      let line = tmuxline#presets#{a:preset_name}#get()
-    catch
-      throw "tmuxline error: invalid preset \"" . a:preset_name . "\""
-    endtry
-    return line
+  try
+    let line = tmuxline#presets#{a:preset_name}#get()
+  catch
+    throw "tmuxline error: invalid preset \"" . a:preset_name . "\""
+  endtry
+  return line
 endfun
 
 " XXX ugly. try to find a better way to create a tmuxline from a hash
@@ -107,10 +107,19 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
     unlet value
   endfor
 
-  for key in filter(['cwin_justify', 'left_length', 'right_length'], 'has_key(hash, v:val)')
-    let bar[key] = hash[key]
-  endfor
-
   return bar
+endfun
+
+fun! tmuxline#util#create_theme_from_airline(mode_palette)
+  return {
+        \'a'    : a:mode_palette.airline_a[2:4],
+        \'b'    : a:mode_palette.airline_b[2:4],
+        \'c'    : a:mode_palette.airline_c[2:4],
+        \'x'    : a:mode_palette.airline_x[2:4],
+        \'y'    : a:mode_palette.airline_y[2:4],
+        \'z'    : a:mode_palette.airline_z[2:4],
+        \'bg'   : a:mode_palette.airline_c[2:4],
+        \'cwin' : a:mode_palette.airline_b[2:4],
+        \'win'  : a:mode_palette.airline_c[2:4]}
 endfun
 

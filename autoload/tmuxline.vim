@@ -143,3 +143,13 @@ fun! tmuxline#get_line_settings(line, theme, separators) abort
 
 endfun
 
+fun! tmuxline#set_theme(theme) abort
+  let preset = get(g:, 'tmuxline_preset', s:default_preset)
+
+  let line = tmuxline#load_line(preset)
+  let separators = tmuxline#get_separators()
+  let line_settings = tmuxline#get_line_settings(line, a:theme, separators)
+
+  call tmuxline#apply(line_settings)
+endfun
+
