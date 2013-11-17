@@ -115,7 +115,6 @@ fun! tmuxline#snapshot(file, overwrite) abort
   let lines += s:snapshot
 
   call writefile(lines, file)
-  echomsg "Snapshot created in \"" . file ."\""
 endfun
 
 fun! tmuxline#get_line_settings(line, theme, separators) abort
