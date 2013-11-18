@@ -8,7 +8,7 @@ function! tmuxline#themes#vim_powerline#get()
         \ 'x': [ 247, 236],
         \ 'y': [ 190, 240],
         \ 'z': [ 235, 252 ],
-        \ 'bg': [ '', 233],
+        \ 'bg': [ 247, 233],
         \ 'win': [ 250, 233 ],
         \ 'win.dim': [ 250, 233, 'dim' ],
         \ 'cwin': [ 22, 148 ],

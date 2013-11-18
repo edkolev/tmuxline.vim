@@ -1,12 +1,13 @@
 
 function! tmuxline#themes#zenburn#get()
-    return {'a'      : ['colour237', 'colour109'],
-          \'b'       : ['colour109', 'colour236'],
-          \'bg'      : ['colour240', 'colour237'],
-          \'c'       : ['colour240', 'colour237'],
-          \'win'    : ['colour109', 'colour237'],
-          \'cwin'     : ['colour237', 'colour109'],
-          \'x'       : ['colour240', 'colour237'],
-          \'y'       : ['colour109', 'colour236'],
-          \'z'       : ['colour237', 'colour109']}
+    return {
+          \'a'    : [ 237, 109 ],
+          \'b'    : [ 109, 236 ],
+          \'bg'   : [ 240, 237 ],
+          \'c'    : [ 240, 237 ],
+          \'win'  : [ 109, 237 ],
+          \'cwin' : [ 237, 109 ],
+          \'x'    : [ 240, 237 ],
+          \'y'    : [ 109, 236 ],
+          \'z'    : [ 237, 109 ]}
 endfunc

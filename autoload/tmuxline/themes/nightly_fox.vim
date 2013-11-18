@@ -10,7 +10,7 @@ function! tmuxline#themes#nightly_fox#get()
         \ 'y.dim'   : [ 243, 16 ],
         \ 'y'       : [ 208, 16 ],
         \ 'z'       : [ 198, 16 ],
-        \ 'bg'      : [ '', 16],
+        \ 'bg'      : [ 208, 16],
         \ 'win'     : [ 231, 16 ],
         \ 'win.dim' : [ 243, 16 ],
         \ 'cwin'    : [ 16, 231, 'bold']}

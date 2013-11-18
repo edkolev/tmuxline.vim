@@ -35,17 +35,8 @@ fun! tmuxline#new()
     let bar.right = tmuxline#builder#new()
     let bar.win = tmuxline#builder#new()
     let bar.cwin = tmuxline#builder#new()
-    let bar.set = {
-          \ 'status-justify' : 'centre',
-          \ 'status-left-length' : 100,
-          \ 'status-right-length' : 100,
-          \ 'status' : 'on',
-          \ 'status-right-attr' : 'none',
-          \ 'status-left-attr' : 'none',
-          \ 'status-attr' : 'none',
-          \ 'status-utf8' : 'on'}
-    let bar.setw = {
-          \ 'window-status-separator' : ''}
+    let bar.set = {}
+    let bar.setw = {}
     return bar
 endfun
 
@@ -118,28 +109,58 @@ fun! tmuxline#snapshot(file, overwrite) abort
 endfun
 
 fun! tmuxline#get_line_settings(line, theme, separators) abort
+  let statusline_config = tmuxline#get_statusline_config(a:line, a:theme, a:separators)
+  let general_config = tmuxline#get_global_config(a:line, a:theme)
+  return general_config + statusline_config
+endfun
+
+fun! tmuxline#get_statusline_config(line, theme, separators)
   let left = a:line.left.build(a:theme, a:separators)
   let right = a:line.right.build(a:theme, a:separators)
   let win = a:line.win.build(a:theme, a:separators)
   let cwin = a:line.cwin.build(a:theme, a:separators)
-  let bg = tmuxline#util#normalize_color(a:theme.bg[1])
 
-  let lines = []
-  for [tmux_option, value] in items(a:line.set)
-    let lines += [ 'set -g ' . tmux_option . ' ' . shellescape(value) ]
-  endfor
-  for [tmux_option, value] in items(a:line.setw)
-    let lines += [ 'setw -g ' . tmux_option . ' ' . shellescape(value) ]
-  endfor
-
-  let lines += [
+  return [
         \ 'set -g status-left ' . shellescape(left),
         \ 'set -g status-right ' . shellescape(right),
         \ 'setw -g window-status-format ' .shellescape(win),
-        \ 'setw -g window-status-current-format ' . shellescape(cwin),
-        \ 'set -g status-bg ' . shellescape(bg)]
-  return lines
+        \ 'setw -g window-status-current-format ' . shellescape(cwin)]
+endfun
 
+fun! tmuxline#get_global_config(line, theme)
+  let bg = tmuxline#util#normalize_color(a:theme.bg[1])
+  let message_bg = tmuxline#util#normalize_color(a:theme.cwin[1])
+  let message_fg = tmuxline#util#normalize_color(a:theme.cwin[0])
+
+  let misc_options = {
+        \ 'status-bg'           : bg,
+        \ 'message-fg'          : message_fg,
+        \ 'message-bg'          : message_bg,
+        \ 'message-command-fg'  : message_fg,
+        \ 'message-command-bg'  : message_bg,
+        \ 'status-justify'      : 'centre',
+        \ 'status-left-length'  : 100,
+        \ 'status-right-length' : 100,
+        \ 'status'              : 'on',
+        \ 'status-right-attr'   : 'none',
+        \ 'status-left-attr'    : 'none',
+        \ 'status-attr'         : 'none',
+        \ 'status-utf8'         : 'on'}
+  let win_options = {
+          \ 'window-status-separator' : ''}
+
+  call extend(misc_options, a:line.set)
+  call extend(win_options, a:line.setw)
+
+  let global_config = []
+  for [tmux_option, value] in items(misc_options)
+    let global_config += [ 'set -g ' . tmux_option . ' ' . shellescape(value) ]
+  endfor
+  for [tmux_option, value] in items(win_options)
+    let global_config += [ 'setw -g ' . tmux_option . ' ' . shellescape(value) ]
+  endfor
+
+  return global_config
 endfun
 
 fun! tmuxline#set_theme(theme) abort
