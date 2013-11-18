@@ -22,63 +22,67 @@ let s:simple_separators = {
 let s:snapshot = []
 
 fun! tmuxline#get_separators()
-    let use_powerline_separators = get(g:, 'tmuxline_powerline_separators', 1)
-    let separators = use_powerline_separators ? s:powerline_separators : s:simple_separators
+  let use_powerline_separators = get(g:, 'tmuxline_powerline_separators', 1)
+  let separators = use_powerline_separators ? s:powerline_separators : s:simple_separators
 
-    return extend(separators, get(g:, 'tmuxline_separators', {}))
+  return extend(separators, get(g:, 'tmuxline_separators', {}))
 endfun
 
 " wrapper around four builders, tmux settings
 fun! tmuxline#new()
-    let bar = {}
-    let bar.left = tmuxline#builder#new()
-    let bar.right = tmuxline#builder#new()
-    let bar.win = tmuxline#builder#new()
-    let bar.cwin = tmuxline#builder#new()
-    let bar.set = {}
-    let bar.setw = {}
-    return bar
+  let bar = {}
+  let bar.left = tmuxline#builder#new()
+  let bar.right = tmuxline#builder#new()
+  let bar.win = tmuxline#builder#new()
+  let bar.cwin = tmuxline#builder#new()
+  let bar.set = {}
+  let bar.setw = {}
+  return bar
 endfun
 
 fun! tmuxline#set_statusline(...) abort
-    let theme_name = get(a:, 1, get(g:, 'tmuxline_theme', s:default_theme))
-    let preset = get(a:, 2, get(g:, 'tmuxline_preset', s:default_preset))
+  let theme_name = get(a:, 1, get(g:, 'tmuxline_theme', s:default_theme))
+  let preset = get(a:, 2, get(g:, 'tmuxline_preset', s:default_preset))
 
-    let line = tmuxline#load_line(preset)
-    let colors = tmuxline#load_colors(theme_name)
-    let separators = tmuxline#get_separators()
+  let line = tmuxline#load_line(preset)
+  let colors = tmuxline#load_colors(theme_name)
+  let separators = tmuxline#get_separators()
 
-    let line_settings = tmuxline#get_line_settings(line, colors, separators)
+  let line_settings = tmuxline#get_line_settings(line, colors, separators)
 
-    call tmuxline#apply(line_settings)
+  call tmuxline#apply(line_settings)
 endfun
 
 fun! tmuxline#load_colors(source) abort
-    if type(a:source) == type("")
-      let colors = tmuxline#util#load_colors_from_theme(a:source)
-    else
-      throw "Invalid type of g:tmuxline_preset"
-    endif
-    return colors
+  if type(a:source) == type("")
+    let colors = tmuxline#util#load_colors_from_theme(a:source)
+  else
+    throw "Invalid type of g:tmuxline_preset"
+  endif
+  return colors
 endfun
 
 fun! tmuxline#load_line(source) abort
-    if type(a:source) == type("")
-      let builder = tmuxline#util#load_line_from_preset(a:source)
-    elseif type(a:source) == type({})
-      let builder = tmuxline#util#create_line_from_hash(a:source)
-    else
-      throw "Invalid type of g:tmuxline_preset"
-    endif
-    return builder
+  if type(a:source) == type("")
+    let builder = tmuxline#util#load_line_from_preset(a:source)
+  elseif type(a:source) == type({})
+    let builder = tmuxline#util#create_line_from_hash(a:source)
+  else
+    throw "Invalid type of g:tmuxline_preset"
+  endif
+  return builder
 endfun
 
 fun! tmuxline#apply(line_settings) abort
-    for setting in a:line_settings
-        call system("tmux " . setting)
-    endfor
+  let temp_file = tempname()
+  try
+    call writefile(a:line_settings, temp_file)
+    call system("tmux source " . shellescape(temp_file))
+  finally
+    call delete(temp_file)
+  endtry
 
-    let s:snapshot = a:line_settings
+  let s:snapshot = a:line_settings
 endfun
 
 fun! tmuxline#snapshot(file, overwrite) abort
