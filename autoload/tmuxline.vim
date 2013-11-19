@@ -135,21 +135,25 @@ fun! tmuxline#get_global_config(line, theme)
   let bg = tmuxline#util#normalize_color(a:theme.bg[1])
   let message_bg = tmuxline#util#normalize_color(a:theme.cwin[1])
   let message_fg = tmuxline#util#normalize_color(a:theme.cwin[0])
+  let pane_border = tmuxline#util#normalize_color(a:theme.b[1])
+  let pane_active_border = tmuxline#util#normalize_color(a:theme.a[1])
 
   let misc_options = {
-        \ 'status-bg'           : bg,
-        \ 'message-fg'          : message_fg,
-        \ 'message-bg'          : message_bg,
-        \ 'message-command-fg'  : message_fg,
-        \ 'message-command-bg'  : message_bg,
-        \ 'status-justify'      : 'centre',
-        \ 'status-left-length'  : 100,
-        \ 'status-right-length' : 100,
-        \ 'status'              : 'on',
-        \ 'status-right-attr'   : 'none',
-        \ 'status-left-attr'    : 'none',
-        \ 'status-attr'         : 'none',
-        \ 'status-utf8'         : 'on'}
+        \ 'status-bg'             : bg,
+        \ 'message-fg'            : message_fg,
+        \ 'message-bg'            : message_bg,
+        \ 'message-command-fg'    : message_fg,
+        \ 'message-command-bg'    : message_bg,
+        \ 'pane-border-fg'        : pane_border,
+        \ 'pane-active-border-fg' : pane_active_border,
+        \ 'status-justify'        : 'centre',
+        \ 'status-left-length'    : 100,
+        \ 'status-right-length'   : 100,
+        \ 'status'                : 'on',
+        \ 'status-right-attr'     : 'none',
+        \ 'status-left-attr'      : 'none',
+        \ 'status-attr'           : 'none',
+        \ 'status-utf8'           : 'on'}
   let win_options = {
           \ 'window-status-separator' : ''}
 
