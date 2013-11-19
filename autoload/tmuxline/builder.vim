@@ -10,6 +10,8 @@ let s:RIGHT_ALT_SEP = 3
 let s:LEFT_SEP = 4
 let s:RIGHT_SEP = 5
 
+let s:DEFAULT = '#[default]'
+
 fun! s:builder.add(style, text)
     call add(self._contents, [s:TEXT ,a:style, a:text])
 endfun
@@ -71,7 +73,7 @@ fun! s:make_separator(from_style, to_style, separator_type, separators, theme) a
     let to_color = tmuxline#util#get_color_definition_from_theme(a:to_style, a:theme)
     let [fg, bg] = a:separator_type == s:LEFT_SEP ? [ from_color[1], to_color[1] ] : [ to_color[1], from_color[1] ]
     let separator = a:separator_type == s:LEFT_SEP ? a:separators.left : a:separators.right
-    return tmuxline#util#tmux_color_attr(fg, bg, '') . separator
+    return s:DEFAULT . tmuxline#util#tmux_color_attr(fg, bg, '') . separator
 endfun
 
 fun! tmuxline#builder#new()
