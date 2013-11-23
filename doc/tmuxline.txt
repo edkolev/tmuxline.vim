@@ -1,0 +1,111 @@
+*tmuxline.txt* tmux statusline generator
+*tmuxline*
+                                      _  _              ~
+                _                    | |(_)             ~
+              _| |_ ____  _   _ _   _| | _ ____  _____  ~
+             (_   _)    \| | | ( \ / ) || |  _ \| ___ | ~
+               | |_| | | | |_| |) X (| || | | | | ____| ~
+                \__)_|_|_|____/(_/ \_)\_)_|_| |_|_____) ~
+
+                  Simple tmux statusline generator ~
+                 with support for powerline symbols ~
+                      and airline integration ~
+
+Author:  Evgeni Kolev
+License: The MIT License (MIT)
+Repo:    http://github.com/edkolev/tmuxline
+
+==============================================================================
+COMMANDS                                                 *tmuxline-commands*
+
+Commands will be available if vim is inside tmux and tmux is in PATH
+
+:Tmuxline [theme] [preset]                                        *Tmuxline*
+  Set theme and preset. Both are optional, defaulting to g:tmuxline_theme
+  and g:tmuxline_preset
+
+:TmuxlineSnapshot[!] [file]                              *:TmuxlineSnapshot*
+  Create a file holding tmux statusline configuration. The file can be sourced
+  by your tmux, typically in your tmux.conf. The command must be executed
+  after |tmuxline| has set tmux's statusline, i.e. after executing
+  |:Tmuxline|. The file will not be overwritten unless bang [!] is given.
+
+==============================================================================
+CONFIGURATION                                       *tmuxline-configuration*
+
+* enable/disable usage of powerline symbols for separators (default on) >
+  g:tmuxline_powerline_separators = 0
+<
+* configure the preset used in the statusline. Can be a "string" holding the
+  name of the preset, or a hash {} holding fine-tuned configuration. The hash
+  can hold keys 'a,b,c' to configure the left part of the statusline, 'x,y,z'
+  to configure the right part, and 'win,cwin' to configure the contents of the
+  inactive and active window(s). tmux options and be configured using a hash
+  in 'options', window options can be specified with 'win_options' >
+
+  " stock preset
+  let g:tmuxline_preset = 'nightly_fox'
+
+  " custom preset with left-justified window list
+  let g:tmuxline_preset = {
+      \'a'       : '#S',
+      \'b'       : '#W',
+      \'c'       : '#H',
+      \'win'     : '#I #W',
+      \'cwin'    : '#I #W',
+      \'x'       : '%a',
+      \'y'       : '#W %R',
+      \'z'       : '#H',
+      \'options' : {'status-justify' : 'left'}}
+
+  " custom preset with shell commands
+ let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'c'    : ['#(whoami)', '#(uptime  | cut -d " " -f 1,2,3)'],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'x'    : '#(date)',
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
+<
+* configure which stock theme should be used by |:Tmuxline| >
+  let g:tmuxline_preset = 'nightly_fox'
+<
+* fine-tune the separators >
+  let g:tmuxline_separators = {
+      \ 'left' : '',
+      \ 'left_alt': '>',
+      \ 'right' : '',
+      \ 'right_alt' : '<',
+      \ 'space' : ' '}
+<
+==============================================================================
+API                                                           *tmuxline-api*
+
+* set theme >
+  tmuxline#api#set_theme({
+      \ 'a': ['237', '109', 'bold'],
+      \ 'b': ['109', '236', ''],
+      \ 'bg': ['240', '237', ''],
+      \ 'c': ['240', '237', ''],
+      \ 'cwin': ['109', '236', ''],
+      \ 'win': ['240', '237', ''],
+      \ 'x': ['240', '237', ''],
+      \ 'y': ['109', '236', ''],
+      \ 'z': ['237', '109', '']})
+<
+* create a snapshot file of the last set statusline, overwriting the file if
+  it exists >
+  tmuxline#api#snapshot(path)
+<
+* create a tmuxline theme from airline's pallette for a mode >
+  tmuxline#api#create_theme_from_airline(mode_palette)
+<
+==============================================================================
+LICENSE                                                   *tmuxline-license*
+
+The MIT License (MIT)
+
+Copyright (c) 2013 Evgeni Kolev
+
+vim:tw=78:ts=8:ft=help:norl:
