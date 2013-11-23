@@ -9,5 +9,5 @@ function! tmuxline#themes#iceberg#get()
         \ 'z'    : [ '59', '74' ],
         \ 'bg'   : [ '74', '236'],
         \ 'win'  : [ '74', '236'],
-        \ 'cwin' : [ '59', '74' ]}
+        \ 'cwin' : [ '153', '59']}
 endfunc
