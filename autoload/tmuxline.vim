@@ -35,8 +35,8 @@ fun! tmuxline#new()
   let bar.right = tmuxline#builder#new()
   let bar.win = tmuxline#builder#new()
   let bar.cwin = tmuxline#builder#new()
-  let bar.set = {}
-  let bar.setw = {}
+  let bar.options = {}
+  let bar.win_options = {}
   return bar
 endfun
 
@@ -157,8 +157,8 @@ fun! tmuxline#get_global_config(line, theme)
   let win_options = {
           \ 'window-status-separator' : ''}
 
-  call extend(misc_options, a:line.set)
-  call extend(win_options, a:line.setw)
+  call extend(misc_options, a:line.options)
+  call extend(win_options, a:line.win_options)
 
   let global_config = []
   for [tmux_option, value] in items(misc_options)

@@ -9,9 +9,10 @@ fun! tmuxline#presets#tmux#get()
         \ 'a': '[#S]',
         \ 'win': '#I:#W#F',
         \ 'cwin': '#I:#W#F',
-        \ 'z': '"#22T" %H:%M %d-%b-%y'})
-
-  let bar.set['status-justify'] = 'left'
+        \ 'z': '"#22T" %H:%M %d-%b-%y',
+        \ 'options': {
+          \'status-justify': 'left'}
+        \})
 
   return bar
 endfun

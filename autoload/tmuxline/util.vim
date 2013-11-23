@@ -107,6 +107,9 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
     unlet value
   endfor
 
+  let bar.options = get(hash, 'options', {})
+  let bar.win_options = get(hash, 'win_options', {})
+
   return bar
 endfun
 

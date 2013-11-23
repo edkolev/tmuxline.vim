@@ -23,7 +23,7 @@ fun! tmuxline#presets#powerline#get()
     call bar.cwin.add('cwin', '#W')
     call bar.cwin.add_left_sep()
 
-    let bar.set['status-justify'] = 'left'
+    let bar.options['status-justify'] = 'left'
 
     return bar
 endfun
