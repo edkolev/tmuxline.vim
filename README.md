@@ -44,6 +44,21 @@ Just start vim inside of tmux. airline's colors will be applied to tmux's status
 
 ### Configuration
 
+#### Stock preset
+
+Set `g:tmuxline_preset` to a stock preset and run `:Tmuxline`
+
+```
+let g:tmuxline_preset = 'nightly_fox'
+" or
+let g:tmuxline_preset = 'full'
+" or
+let g:tmuxline_preset = 'tmux'
+" other presets available in autoload/tmuxline/presets/*
+```
+
+#### Custom preset
+
 Contents of the statusline are configured with a simple hash.
 Left section is configured with `a, b, c`, right with `x, y, z`. `cwin` and `win` affect the current (active) window and the in-active windows respectively.
 ```
