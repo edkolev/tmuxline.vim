@@ -32,7 +32,7 @@ source-file [file]
 if-shell "test -f [file]" "source [file]"
 ```
 
-Note that :Tmuxline and :TmuxlineSnapshot are available inside tmux only.
+Note that :Tmuxline and :TmuxlineSnapshot are available inside vim only.
 
 ## Configuration
 
