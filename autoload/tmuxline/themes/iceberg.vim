@@ -1,6 +1,6 @@
 
 function! tmuxline#themes#iceberg#get()
-    return {
+  return {
         \ 'a'    : [ '59', '74' ],
         \ 'b'    : [ '153', '59'],
         \ 'c'    : [ '74', '236'],
