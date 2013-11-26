@@ -41,11 +41,19 @@ fun! tmuxline#new()
 endfun
 
 fun! tmuxline#set_statusline(...) abort
-  let theme_name = get(a:, 1, get(g:, 'tmuxline_theme', s:default_theme))
+  let theme = get(a:, 1, get(g:, 'tmuxline_theme', s:default_theme))
   let preset = get(a:, 2, get(g:, 'tmuxline_preset', s:default_preset))
 
-  let line = tmuxline#load_line(preset)
-  let colors = tmuxline#load_colors(theme_name)
+  try
+    call tmuxline#set_statusline_theme_and_preset(theme, preset)
+  catch /^tmuxline:/
+    echohl ErrorMsg | echomsg v:exception | echohl None
+  endtry
+endfun
+
+fun! tmuxline#set_statusline_theme_and_preset(theme, preset)
+  let line = tmuxline#load_line(a:preset)
+  let colors = tmuxline#load_colors(a:theme)
   let separators = tmuxline#get_separators()
 
   let line_settings = tmuxline#get_line_settings(line, colors, separators)

@@ -45,8 +45,8 @@ endfun
 fun! tmuxline#util#load_colors_from_theme(theme_name) abort
   try
     let colors = tmuxline#themes#{a:theme_name}#get()
-  catch
-    throw "tmuxline error: invalid theme \"" . a:theme_name . "\""
+  catch /^Vim(let):E117: Unknown function: tmuxline#themes#.*#get/
+    throw "tmuxline: Theme cannot be found '" . a:theme_name . "'"
   endtry
   return colors
 endfun
@@ -54,8 +54,8 @@ endfun
 fun! tmuxline#util#load_line_from_preset(preset_name) abort
   try
     let line = tmuxline#presets#{a:preset_name}#get()
-  catch
-    throw "tmuxline error: invalid preset \"" . a:preset_name . "\""
+  catch /^Vim(let):E117: Unknown function: tmuxline#presets#.*#get/
+    throw "tmuxline: Preset cannot be found '" . a:preset_name . "'"
   endtry
   return line
 endfun
