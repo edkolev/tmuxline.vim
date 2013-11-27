@@ -60,55 +60,45 @@ fun! tmuxline#util#load_line_from_preset(preset_name) abort
   return line
 endfun
 
-" XXX ugly. try to find a better way to create a tmuxline from a hash
 fun! tmuxline#util#create_line_from_hash(hash) abort
-  let bar = tmuxline#new()
   let hash = deepcopy(a:hash)
 
-  for key in filter(['a','b','c'], 'has_key(hash, v:val)')
+  let bar = tmuxline#new()
+  let bar.options = get(hash, 'options', {})
+  let bar.win_options = get(hash, 'win_options', {})
+
+  for key in filter(['a','b','c', 'x', 'y', 'z', 'win', 'cwin'], 'has_key(hash, v:val)')
     let value = hash[key]
-    let parts = type(value) == type([]) ? value : [value]
-    call map(parts, 'escape(v:val, "\"")')
-    let parts_code = map(copy(parts), '"call bar.left.add(\"" . key . "\", \"" . v:val . "\")"')
+    let hash[key] = type(value) == type([]) ? value : [value]
+    call map(hash[key], 'escape(v:val, "\"")')
+    unlet value
+  endfor
+
+  for key in filter(['a','b','c'], 'has_key(hash, v:val)')
+    let parts_code = map(copy(hash[key]), '"call bar.left.add(\"" . key . "\", \"" . v:val . "\")"')
     exec join(parts_code, '| call bar.left.add_left_alt_sep() |')
     call bar.left.add_left_sep()
-    unlet value
   endfor
 
   for key in filter(['x','y','z'], 'has_key(hash, v:val)')
-    let value = hash[key]
-    let parts = type(value) == type([]) ? value : [value]
-    call map(parts, 'escape(v:val, "\"")')
-    let parts_code = map(copy(parts), '"call bar.right.add(\"" . key . "\", \"" . v:val . "\")"')
+    let parts_code = map(copy(hash[key]), '"call bar.right.add(\"" . key . "\", \"" . v:val . "\")"')
     call bar.right.add_right_sep()
     exec join(parts_code, '| call bar.right.add_right_alt_sep() |')
-    unlet value
   endfor
 
   for key in filter(['win'], 'has_key(hash, v:val)')
-    let value = hash[key]
-    let parts = type(value) == type([]) ? value : [value]
-    call map(parts, 'escape(v:val, "\"")')
-    let parts_code = map(copy(parts), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
+    let parts_code = map(copy(hash[key]), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
     call bar.win.add_left_sep()
     exec join(parts_code, '| call bar.win.add_left_alt_sep() |')
     call bar.win.add_left_sep()
-    unlet value
   endfor
 
   for key in filter(['cwin'], 'has_key(hash, v:val)')
-    let value = hash[key]
-    let parts = type(value) == type([]) ? value : [value]
-    call map(parts, 'escape(v:val, "\"")')
-    let parts_code = map(copy(parts), '"call bar.cwin.add(\"" . key . "\", \"" . v:val . "\")"')
+    let parts_code = map(copy(hash[key]), '"call bar.cwin.add(\"" . key . "\", \"" . v:val . "\")"')
     call bar.cwin.add_left_sep()
     exec join(parts_code, '| call bar.cwin.add_left_alt_sep() |')
     call bar.cwin.add_left_sep()
-    unlet value
   endfor
-
-  let bar.options = get(hash, 'options', {})
-  let bar.win_options = get(hash, 'win_options', {})
 
   return bar
 endfun
