@@ -42,9 +42,7 @@ Just start vim inside of tmux. airline's colors will be applied to tmux's status
 
 ![img](https://f.cloud.github.com/assets/1532071/1556059/d24a5c42-4ea7-11e3-9965-c13418d889a1.png)
 
-### Configuration
-
-#### Stock preset
+### Stock preset
 
 Set `g:tmuxline_preset` to a stock preset and run `:Tmuxline`
 
@@ -57,7 +55,7 @@ let g:tmuxline_preset = 'tmux'
 " other presets available in autoload/tmuxline/presets/*
 ```
 
-#### Custom preset
+### Custom preset
 
 Contents of the statusline are configured with a simple hash.
 Left section is configured with `a, b, c`, right with `x, y, z`. `cwin` and `win` affect the current (active) window and the in-active windows respectively.
