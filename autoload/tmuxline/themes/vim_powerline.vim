@@ -10,6 +10,7 @@ function! tmuxline#themes#vim_powerline#get()
         \ 'z': [ 235, 252 ],
         \ 'bg': [ 247, 233],
         \ 'win': [ 250, 233 ],
+        \ 'win.activity': [ 255, 233, 'bold' ],
         \ 'win.dim': [ 250, 233, 'dim' ],
         \ 'cwin': [ 22, 148 ],
         \ 'cwin.dim': [ 22, 148, 'dim']}
