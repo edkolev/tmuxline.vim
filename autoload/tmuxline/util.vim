@@ -2,6 +2,11 @@
 "
 " Copyright (c) 2013 Evgeni Kolev
 
+let s:DEFAULT_COLOR = 'default'
+let s:DEFAULT_COLOR_AND_ATTRIBUTES = '#[default]'
+
+" TODO replace magic numbers 0,1,2 with FG,BG,ATTR
+
 fun! tmuxline#util#tmux_color_attr(fg, bg, attr)
   let fg = tmuxline#util#normalize_color(a:fg)
   let bg = tmuxline#util#normalize_color(a:bg)
@@ -17,28 +22,37 @@ fun! tmuxline#util#normalize_color(color)
   return a:color =~ '^\d\+$' ? "colour" . a:color : a:color
 endfun
 
+fun! tmuxline#util#normalize_color_definition(color_definition)
+  let fg   = a:color_definition[0]
+  let bg   = a:color_definition[1]
+  let attr = get(a:color_definition, 2, '')
+
+  return [ tmuxline#util#normalize_color(fg), tmuxline#util#normalize_color(bg), attr ]
+endfun
+
 fun! tmuxline#util#get_color_definition_from_theme(color_name, theme)
   if has_key(a:theme, a:color_name)
-    return a:theme[a:color_name]
+    let color_definition = a:theme[a:color_name]
   else
     let downgraded_color_name = substitute(a:color_name, '\..*', '', '')
-    if has_key(a:theme, downgraded_color_name)
-      " echohl WarningMsg
-      " echo "tmuxline warning: Using color '" . downgraded_color_name . "' instead of '" . a:color_name . "'"
-      " echohl None
-      return a:theme[downgraded_color_name]
+    if !has_key(a:theme, downgraded_color_name)
+      throw "tmuxline: Color definition '" . a:color_name . "' not found in theme"
     else
-      throw "tmuxline error: Color definition '" . a:color_name . "' not found in theme"
+      let color_definition = a:theme[downgraded_color_name]
     endif
   endif
+
+  return tmuxline#util#normalize_color_definition(color_definition)
 endfun
 
 fun! tmuxline#util#get_color_from_theme(color_name, theme) abort
-  let color_definition = tmuxline#util#get_color_definition_from_theme(a:color_name, a:theme)
+  if a:color_name ==# s:DEFAULT_COLOR
+    return s:DEFAULT_COLOR_AND_ATTRIBUTES
+  endif
 
-  let fg = color_definition[0]
-  let bg = color_definition[1]
-  let attr = get(color_definition, 2, '')
+  let color_definition = tmuxline#util#get_color_definition_from_theme(a:color_name, a:theme)
+  let [fg, bg, attr] = color_definition[0:2]
+
   return tmuxline#util#tmux_color_attr(fg, bg, attr)
 endfun
 
@@ -89,10 +103,10 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
   endfor
 
   for key in filter(['win'], 'has_key(hash, v:val)')
-    let parts_code = map(copy(hash[key]), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
-    exec 'call bar.win.add_' . win_sep_type . '_sep()'
+    let parts_code = map(copy(hash[key]), '"call bar.win.add(\"" . s:DEFAULT_COLOR . "\", \"" . v:val . "\")"')
+    exec 'call bar.win.add_' . win_sep_type . '_sep() | call bar.win.add(key, "")'
     exec join(parts_code, '| call bar.win.add_' . win_sep_type . '_alt_sep() |')
-    exec 'call bar.win.add_' . win_sep_type . '_sep()'
+    exec 'call bar.win.add(key, "") | call bar.win.add_' . win_sep_type . '_sep()'
   endfor
 
   for key in filter(['cwin'], 'has_key(hash, v:val)')
@@ -106,7 +120,7 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
 endfun
 
 fun! tmuxline#util#create_theme_from_airline(mode_palette)
-  return {
+  let theme = {
         \'a'    : a:mode_palette.airline_a[2:4],
         \'b'    : a:mode_palette.airline_b[2:4],
         \'c'    : a:mode_palette.airline_c[2:4],
@@ -116,5 +130,15 @@ fun! tmuxline#util#create_theme_from_airline(mode_palette)
         \'bg'   : a:mode_palette.airline_c[2:4],
         \'cwin' : a:mode_palette.airline_b[2:4],
         \'win'  : a:mode_palette.airline_c[2:4]}
-endfun
 
+  " use background in 'a' section for windows with activity alert
+  let bg           = theme.bg[1]
+  let a_section_bg = theme.a[1]
+  let win_fg       = theme.win[0]
+  " use the color only if it's different from the other windows and the background
+  if a_section_bg != bg && a_section_bg != win_fg
+    let theme['win.activity'] = [ a_section_bg, bg ]
+  endif
+
+  return theme
+endfun
