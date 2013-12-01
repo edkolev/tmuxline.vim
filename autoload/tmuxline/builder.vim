@@ -45,7 +45,7 @@ fun! s:builder.build(theme, separators) abort
         if type == s:TEXT
             if last_style == style
                 let line .= space . text . space
-            else
+            elseif len(text) > 0
                 let color = tmuxline#util#get_color_from_theme(style, a:theme)
                 let line .= color . space . text . space
             endif
@@ -53,9 +53,7 @@ fun! s:builder.build(theme, separators) abort
             let line .= a:separators.left_alt
         elseif type == s:RIGHT_ALT_SEP
             let line .= a:separators.right_alt
-        elseif type == s:RIGHT_SEP
-            let pending_separator = type
-        elseif type == s:LEFT_SEP
+        elseif type == s:RIGHT_SEP || type == s:LEFT_SEP
             let pending_separator = type
         endif
 
