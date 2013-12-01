@@ -13,6 +13,7 @@ fun! tmuxline#presets#nightly_fox#get()
     call bar.cwin.add_left_sep()
 
     let bar.options['status-justify'] = 'left'
+    let bar.win_options['window-status-activity-attr'] = 'none'
 
     return bar
 endfun
