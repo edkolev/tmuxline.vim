@@ -32,7 +32,7 @@ source-file [file]
 if-shell "test -f [file]" "source [file]"
 ```
 
-Note that :Tmuxline and :TmuxlineSnapshot are available only when vim is inside a tmux sesion.
+Note that `:Tmuxline` and `:TmuxlineSnapshot` are available only when vim is inside a tmux session.
 
 ## Configuration
 
@@ -115,6 +115,14 @@ let g:tmuxline_preset = {
 
 use `let g:tmuxline_powerline_separators = 0` to disable using powerline symbols
 
+## Installation
+
+The plugin's files follow the standard layout for vim plugins.
+
+- [Pathogen][8] `git clone https://github.com/edkolev/tmuxline.vim ~/.vim/bundle/tmuxline.vim`
+- [Vundle][9] `Bundle '/edkolev/tmuxline.vim'`
+- [NeoBundle][10] `NeoBundle 'edkolev/tmuxline.vim'`
+
 ## Inspired by
 
 - Paul Rouget's [desktop setup][1]
@@ -141,3 +149,8 @@ MIT License. Copyright (c) 2013 Evgeni Kolev.
 [5]: http://www.raspberrypi.org/
 [6]: https://github.com/Lokaltog/powerline/blob/82842e015cda89fb48b1256d34c53f964e2fa151/powerline/bindings/tmux/powerline.conf#L4
 [7]: https://github.com/bling/vim-airline
+[8]: https://github.com/tpope/vim-pathogen
+[9]: https://github.com/gmarik/vundle
+[10]: https://github.com/Shougo/neobundle.vim
+
+
