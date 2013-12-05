@@ -120,7 +120,7 @@ use `let g:tmuxline_powerline_separators = 0` to disable using powerline symbols
 The plugin's files follow the standard layout for vim plugins.
 
 - [Pathogen][8] `git clone https://github.com/edkolev/tmuxline.vim ~/.vim/bundle/tmuxline.vim`
-- [Vundle][9] `Bundle '/edkolev/tmuxline.vim'`
+- [Vundle][9] `Bundle 'edkolev/tmuxline.vim'`
 - [NeoBundle][10] `NeoBundle 'edkolev/tmuxline.vim'`
 
 ## Inspired by
