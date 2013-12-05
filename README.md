@@ -113,7 +113,19 @@ let g:tmuxline_preset = {
 
 ![img](https://f.cloud.github.com/assets/1532071/1556062/d82660ca-4ea7-11e3-9df3-4b084a992c0c.png)
 
-use `let g:tmuxline_powerline_separators = 0` to disable using powerline symbols
+### Separators
+
+Use `let g:tmuxline_powerline_separators = 0` to disable using powerline symbols
+
+To fine-tune the separators, use `g:tmuxline_separators`:
+```
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
+```
 
 ## Installation
 
