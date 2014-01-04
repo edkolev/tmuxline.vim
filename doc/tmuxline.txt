@@ -20,7 +20,7 @@ COMMANDS                                                 *tmuxline-commands*
 
 Commands will be available if vim is inside tmux and tmux is in PATH
 
-:Tmuxline [theme] [preset]                                        *Tmuxline*
+:Tmuxline [theme] [preset]                                       *:Tmuxline*
   Set theme and preset. Both are optional, defaulting to g:tmuxline_theme
   and g:tmuxline_preset
 
