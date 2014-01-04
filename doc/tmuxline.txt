@@ -13,7 +13,7 @@
 
 Author:  Evgeni Kolev
 License: The MIT License (MIT)
-Repo:    http://github.com/edkolev/tmuxline
+Repo:    http://github.com/edkolev/tmuxline.vim
 
 ==============================================================================
 COMMANDS                                                 *tmuxline-commands*
