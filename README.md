@@ -154,6 +154,9 @@ let g:tmuxline_theme = {
     \   'cwin' : [ 236, 103 ],
     \   'bg'   : [ 244, 236 ],
     \ }
+" values represent: [ FG, BG, ATTR ]
+"   FG ang BG are color codes
+"   ATTR (optional) is a comme-delimited string of one or more of bold, dim, underscore, etc. For details refer to 'message-attr attributes' in tmux man page
 ```
 
 ## Installation
