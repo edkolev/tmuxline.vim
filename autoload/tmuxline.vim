@@ -64,6 +64,8 @@ endfun
 fun! tmuxline#load_colors(source) abort
   if type(a:source) == type("")
     let colors = tmuxline#util#load_colors_from_theme(a:source)
+  elseif type(a:source) == type({})
+    let colors = tmuxline#util#load_colors_from_hash(a:source)
   else
     throw "Invalid type of g:tmuxline_preset"
   endif

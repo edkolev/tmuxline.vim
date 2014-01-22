@@ -65,6 +65,15 @@ fun! tmuxline#util#load_colors_from_theme(theme_name) abort
   return colors
 endfun
 
+fun! tmuxline#util#load_colors_from_hash(hash) abort
+  for required_color_name in ['a', 'b', 'c', 'x', 'y', 'z', 'win', 'cwin', 'bg']
+    if !has_key(a:hash, required_color_name)
+      throw "tmuxline: Theme must define color for '" . required_color_name . "'"
+    endif
+  endfor
+  return deepcopy(a:hash)
+endfun
+
 fun! tmuxline#util#load_line_from_preset(preset_name) abort
   try
     let line = tmuxline#presets#{a:preset_name}#get()
