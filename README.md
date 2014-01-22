@@ -127,6 +127,35 @@ let g:tmuxline_separators = {
     \ 'space' : ' '}
 ```
 
+### Theme
+
+Use `g:tmuxline_theme` to configure the theme. `g:tmuxline_theme` can hold either a string (stock theme) or a hash (custom theme).
+
+```
+let g:tmuxline_theme = 'icebert'
+" or
+let g:tmuxline_theme = 'zenburn'
+" or
+let g:tmuxline_theme = 'jellybeans'
+" other themes available in autoload/tmuxline/themes/*
+```
+
+Alternatively, `g:tmuxline_theme` can be used to fine tune a custom theme:
+
+```
+let g:tmuxline_theme = {
+    \   'a'    : [ 236, 103 ],
+    \   'b'    : [ 253, 239 ],
+    \   'c'    : [ 244, 236 ],
+    \   'x'    : [ 244, 236 ],
+    \   'y'    : [ 253, 239 ],
+    \   'z'    : [ 236, 103 ]
+    \   'win'  : [ 103, 236 ],
+    \   'cwin' : [ 236, 103 ],
+    \   'bg'   : [ 244, 236 ],
+    \ }
+```
+
 ## Installation
 
 The plugin's files follow the standard layout for vim plugins.
