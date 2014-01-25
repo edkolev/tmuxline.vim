@@ -129,6 +129,11 @@ let g:tmuxline_separators = {
 
 ### Theme
 
+Note that [vim-airline][2] has a [tmuxline extenstion][11] which by default sets airline's color theme onto tmuxline.
+If you don't want airline colors in tmuxline, set `let g:airline#extensions#tmuxline#enabled = 0` in vimrc.
+
+Modifying `g:tmuxline_theme` (details below) makes sense only if the airline-tmuxline is not enabled.
+
 Use `g:tmuxline_theme` to configure the theme. `g:tmuxline_theme` can hold either a string (stock theme) or a hash (custom theme).
 
 ```
@@ -198,5 +203,8 @@ MIT License. Copyright (c) 2013 Evgeni Kolev.
 [8]: https://github.com/tpope/vim-pathogen
 [9]: https://github.com/gmarik/vundle
 [10]: https://github.com/Shougo/neobundle.vim
+[11]: https://github.com/bling/vim-airline#tmuxline
+
+
 
 
