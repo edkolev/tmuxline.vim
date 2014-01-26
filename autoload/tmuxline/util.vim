@@ -128,6 +128,19 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
   return bar
 endfun
 
+fun! tmuxline#util#create_theme_from_lightline(mode_palette)
+  return {
+        \'a' : a:mode_palette.left[0][2:4],
+        \'b' : a:mode_palette.left[1][2:4],
+        \'c' : a:mode_palette.middle[0][2:4],
+        \'x' : a:mode_palette.middle[0][2:4],
+        \'y' : a:mode_palette.right[1][2:4],
+        \'z' : a:mode_palette.right[0][2:4],
+        \'bg' : a:mode_palette.middle[0][2:4],
+        \'cwin' : a:mode_palette.left[1][2:4],
+        \'win' : a:mode_palette.middle[0][2:4]}
+endfun
+
 fun! tmuxline#util#create_theme_from_airline(mode_palette)
   let theme = {
         \'a'    : a:mode_palette.airline_a[2:4],
