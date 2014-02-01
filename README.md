@@ -6,7 +6,7 @@ Simple tmux statusline generator with support for powerline symbols and airline 
 
 ## Features
 
-- use [vim-airline][7]/[lightline.vim[12] colors, so tmux and vim share the same statusline colortheme
+- use [vim-airline][7]/[lightline.vim][12] colors, so tmux and vim share the same statusline colortheme
 - preloaded with stock themes and presets, which can be combined anyway you want
 - configure tmux statusline using a simple hash, in case stock presets don't meet your needs
 - create a snapshot .conf file which can be sourced by tmux, no need to open vim to set your tmux statusline
