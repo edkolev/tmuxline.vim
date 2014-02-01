@@ -65,6 +65,9 @@ To apply lightline.vim's colors on tmux, use one of the `lightline_*` themes:
 :Tmuxline lightline_visual
 ```
 
+![img](https://f.cloud.github.com/assets/1532071/2058566/ec64bf70-8b77-11e3-883f-82b41a83f6ac.png)
+
+
 ### Stock preset
 
 Set `g:tmuxline_preset` to a stock preset and run `:Tmuxline`
