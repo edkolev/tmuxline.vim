@@ -42,6 +42,18 @@ Just start vim inside of tmux. airline's colors will be applied to tmux's status
 
 ![img](https://f.cloud.github.com/assets/1532071/1556059/d24a5c42-4ea7-11e3-9965-c13418d889a1.png)
 
+Alternatively, you can set it manually using `airline_*` themes:
+```
+:Tmuxline airline
+" or
+:Tmuxline airline_insert
+" or
+:Tmuxline airline_visual
+```
+
+If you set airline theme manually, make sure the [airline-tmuxline][11] extension  is disabled, so it doesn't overwrite the theme:
+`let g:airline#extensions#tmuxline#enabled = 0`
+
 ### lightline.vim
 
 To apply lightline.vim's colors on tmux, use one of the `lightline_*` themes:
@@ -216,7 +228,4 @@ MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 [10]: https://github.com/Shougo/neobundle.vim
 [11]: https://github.com/bling/vim-airline#tmuxline
 [12]: https://github.com/itchyny/lightline.vim
-
-
-
 
