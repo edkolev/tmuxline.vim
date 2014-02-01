@@ -1,10 +1,10 @@
-
-function! tmuxline#themes#lightline#get() abort
+function! tmuxline#themes#lightline_insert#get() abort
   if !exists('*lightline#palette')
     throw "tmuxline: Can't load theme from lightline, function lightline#palette() doesn't exist. Is latest lightline loaded?"
   endif
 
   let palette = lightline#palette()
-  let mode = 'normal'
-  return tmuxline#util#create_theme_from_lightline(palette[mode])
+  let pallete_for_insert = extend( deepcopy(palette.normal), palette.insert )
+
+  return tmuxline#util#create_theme_from_lightline(pallete_for_insert)
 endfunc
