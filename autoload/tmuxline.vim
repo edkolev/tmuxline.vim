@@ -1,6 +1,6 @@
 " The MIT License (MIT)
 "
-" Copyright (c) 2013 Evgeni Kolev
+" Copyright (c) 2013-2014 Evgeni Kolev
 
 let s:default_theme = 'powerline'
 let s:default_preset = 'powerline'

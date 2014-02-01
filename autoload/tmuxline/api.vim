@@ -1,6 +1,6 @@
 " The MIT License (MIT)
 "
-" Copyright (c) 2013 Evgeni Kolev
+" Copyright (c) 2013-2014 Evgeni Kolev
 
 fun! tmuxline#api#set_theme(theme)
   return tmuxline#set_theme(a:theme)

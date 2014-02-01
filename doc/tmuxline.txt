@@ -106,6 +106,6 @@ LICENSE                                                   *tmuxline-license*
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Evgeni Kolev
+Copyright (c) 2013-2014 Evgeni Kolev
 
 vim:tw=78:ts=8:ft=help:norl:
