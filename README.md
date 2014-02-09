@@ -217,8 +217,6 @@ Somewhat-similar plugins:
 
 MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/edkolev/tmuxline.vim/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 [1]: http://paulrouget.com/e/myconf/
 [2]: https://github.com/bling/vim-airline
 [3]: https://github.com/Lokaltog/powerline
