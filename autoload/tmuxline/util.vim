@@ -30,6 +30,10 @@ fun! tmuxline#util#normalize_color_definition(color_definition)
   return [ tmuxline#util#normalize_color(fg), tmuxline#util#normalize_color(bg), attr ]
 endfun
 
+fun! tmuxline#util#wrap_in_quotes(text)
+  return '"' . escape(a:text, '"') . '"'
+endfun
+
 fun! tmuxline#util#get_color_definition_from_theme(color_name, theme)
   if has_key(a:theme, a:color_name)
     let color_definition = a:theme[a:color_name]

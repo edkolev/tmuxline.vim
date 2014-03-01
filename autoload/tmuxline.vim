@@ -87,7 +87,7 @@ fun! tmuxline#apply(line_settings) abort
   let temp_file = tempname()
   try
     call writefile(a:line_settings, temp_file)
-    call system("tmux source " . shellescape(temp_file))
+    call system("tmux source " . tmuxline#util#wrap_in_quotes(temp_file))
   finally
     call delete(temp_file)
   endtry
@@ -135,10 +135,10 @@ fun! tmuxline#get_statusline_config(line, theme, separators)
   let cwin = a:line.cwin.build(a:theme, a:separators)
 
   return [
-        \ 'set -g status-left ' . shellescape(left),
-        \ 'set -g status-right ' . shellescape(right),
-        \ 'setw -g window-status-format ' .shellescape(win),
-        \ 'setw -g window-status-current-format ' . shellescape(cwin)]
+        \ 'set -g status-left ' . tmuxline#util#wrap_in_quotes(left),
+        \ 'set -g status-right ' . tmuxline#util#wrap_in_quotes(right),
+        \ 'setw -g window-status-format ' . tmuxline#util#wrap_in_quotes(win),
+        \ 'setw -g window-status-current-format ' . tmuxline#util#wrap_in_quotes(cwin)]
 endfun
 
 fun! tmuxline#get_global_config(line, theme)
@@ -184,10 +184,10 @@ fun! tmuxline#get_global_config(line, theme)
 
   let global_config = []
   for [tmux_option, value] in items(misc_options)
-    let global_config += [ 'set -g ' . tmux_option . ' ' . shellescape(value) ]
+    let global_config += [ 'set -g ' . tmux_option . ' ' . tmuxline#util#wrap_in_quotes(value) ]
   endfor
   for [tmux_option, value] in items(win_options)
-    let global_config += [ 'setw -g ' . tmux_option . ' ' . shellescape(value) ]
+    let global_config += [ 'setw -g ' . tmux_option . ' ' . tmuxline#util#wrap_in_quotes(value) ]
   endfor
 
   return global_config
