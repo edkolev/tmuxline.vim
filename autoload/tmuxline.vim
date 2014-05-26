@@ -154,7 +154,7 @@ fun! tmuxline#get_global_config(line, theme)
   let window_attr = len(window[2]) ? window[2] : 'none'
 
   let window_activity = tmuxline#util#get_color_definition_from_theme('win.activity', a:theme)
-  if !has_key(a:theme, 'win.activity') | 
+  if !has_key(a:theme, 'win.activity') |
     let window_activity[2] = 'underscore'
   endif
   let window_activity_fg = window_activity[0]
@@ -162,29 +162,22 @@ fun! tmuxline#get_global_config(line, theme)
   let window_activity_attr = len(window_activity[2]) ? window_activity[2] : 'none'
 
   let misc_options = {
-        \ 'status-bg'                   : bg,
-        \ 'message-fg'                  : message_fg,
-        \ 'message-bg'                  : message_bg,
-        \ 'message-command-fg'          : message_fg,
-        \ 'message-command-bg'          : message_bg,
-        \ 'pane-border-fg'              : pane_border,
-        \ 'pane-active-border-fg'       : pane_active_border,
-        \ 'status-justify'              : 'centre',
-        \ 'status-left-length'          : 100,
-        \ 'status-right-length'         : 100,
-        \ 'status'                      : 'on',
-        \ 'status-right-attr'           : 'none',
-        \ 'status-left-attr'            : 'none',
-        \ 'status-attr'                 : 'none',
-        \ 'status-utf8'                 : 'on'}
+        \ 'status-style'                 : printf('bg=%s,none', bg),
+        \ 'message-style'                : printf('fg=%s,bg=%s', message_fg, message_bg),
+        \ 'message-command-style'        : printf('fg=%s,bg=%s', message_fg, message_bg),
+        \ 'pane-border-style'            : printf('fg=%s', pane_border),
+        \ 'pane-active-border-style'     : printf('fg=%s', pane_active_border),
+        \ 'status-justify'               : 'centre',
+        \ 'status-left-length'           : 100,
+        \ 'status-right-length'          : 100,
+        \ 'status'                       : 'on',
+        \ 'status-right-style'           : 'none',
+        \ 'status-left-style'            : 'none',
+        \ 'status-utf8'                  : 'on'}
   let win_options = {
-        \ 'window-status-fg'            : window_fg,
-        \ 'window-status-bg'            : window_bg,
-        \ 'window-status-attr'          : window_attr,
-        \ 'window-status-activity-fg'   : window_activity_fg,
-        \ 'window-status-activity-bg'   : window_activity_bg,
-        \ 'window-status-activity-attr' : window_activity_attr,
-        \ 'window-status-separator'     : ''}
+        \ 'window-status-style'          : printf('fg=%s,bg=%s,%s', window_fg, window_bg, window_attr),
+        \ 'window-status-activity-style' : printf('fg=%s,bg=%s,%s', window_activity_fg, window_activity_bg, window_activity_attr),
+        \ 'window-status-separator'      : ''}
 
   call extend(misc_options, a:line.options)
   call extend(win_options, a:line.win_options)
