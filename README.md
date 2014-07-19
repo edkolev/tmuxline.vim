@@ -1,15 +1,69 @@
 # tmuxline.vim
 
-Simple tmux statusline generator with support for powerline symbols and airline integration
+Simple tmux statusline generator with support for powerline symbols and vim/airline/lightline statusline integration
+
+- colors from [vim-airline][7]/[lightline.vim][12]
 
 ![img](https://f.cloud.github.com/assets/1532071/1556058/d2347eea-4ea7-11e3-9393-660b2e2c143a.png)
 
+- colors from vim's own [statusline][13]
+
+![img](https://cloud.githubusercontent.com/assets/1532071/3634460/5b2858f4-0f30-11e4-925c-bf555bb65806.png)
+
 ## Features
 
-- use [vim-airline][7]/[lightline.vim][12] colors, so tmux and vim share the same statusline colortheme
+- use [vim][13]/[vim-airline][7]/[lightline.vim][12] colors, so tmux and vim share the same statusline colortheme
 - preloaded with stock themes and presets, which can be combined anyway you want
 - configure tmux statusline using a simple hash, in case stock presets don't meet your needs
 - create a snapshot .conf file which can be sourced by tmux, no need to open vim to set your tmux statusline
+
+## Quickstart
+
+#### use vim's statusline colors
+
+Use one of the `vim_statusline_*` themes (and optionally set in vimrc `let g:tmuxline_powerline_separators = 0`):
+
+```
+:Tmuxline vim_statusline_1
+" or
+:Tmuxline vim_statusline_2
+" or
+:Tmuxline vim_statusline_3
+```
+
+![img](https://cloud.githubusercontent.com/assets/1532071/3787457/dc6ef76c-1a19-11e4-8d77-964e7db87337.png)
+
+#### use vim-airline colors
+
+Just start vim inside of tmux. airline's colors will be applied to tmux's statusline
+
+![img](https://f.cloud.github.com/assets/1532071/1556059/d24a5c42-4ea7-11e3-9965-c13418d889a1.png)
+
+Alternatively, you can set it manually using `airline_*` themes:
+```
+:Tmuxline airline
+" or
+:Tmuxline airline_insert
+" or
+:Tmuxline airline_visual
+```
+
+If you set airline theme manually, make sure the [airline-tmuxline][11] extension  is disabled, so it doesn't overwrite the theme:
+
+`let g:airline#extensions#tmuxline#enabled = 0`
+
+#### use lightline.vim colors
+
+Use one of the `lightline_*` themes:
+```
+:Tmuxline lightline
+" or
+:Tmuxline lightline_insert
+" or
+:Tmuxline lightline_visual
+```
+
+![img](https://f.cloud.github.com/assets/1532071/2058566/ec64bf70-8b77-11e3-883f-82b41a83f6ac.png)
 
 ## Usage
 
@@ -18,7 +72,7 @@ Set a a colortheme and a preset, both arguments are optional
 :Tmuxline [theme] [preset]
 ```
 
-After running :Tmuxline, create a snapshot file which can be sourced by tmux.conf
+After running :Tmuxline, create a snapshot file which can be sourced by tmux.conf on startup
 ```
 :TmuxlineSnapshot [file]
 ```
@@ -35,38 +89,6 @@ if-shell "test -f [file]" "source [file]"
 Note that `:Tmuxline` and `:TmuxlineSnapshot` are available only when vim is inside a tmux session.
 
 ## Configuration
-
-### vim-airline
-
-Just start vim inside of tmux. airline's colors will be applied to tmux's statusline
-
-![img](https://f.cloud.github.com/assets/1532071/1556059/d24a5c42-4ea7-11e3-9965-c13418d889a1.png)
-
-Alternatively, you can set it manually using `airline_*` themes:
-```
-:Tmuxline airline
-" or
-:Tmuxline airline_insert
-" or
-:Tmuxline airline_visual
-```
-
-If you set airline theme manually, make sure the [airline-tmuxline][11] extension  is disabled, so it doesn't overwrite the theme:
-`let g:airline#extensions#tmuxline#enabled = 0`
-
-### lightline.vim
-
-To apply lightline.vim's colors on tmux, use one of the `lightline_*` themes:
-```
-:Tmuxline lightline
-" or
-:Tmuxline lightline_insert
-" or
-:Tmuxline lightline_visual
-```
-
-![img](https://f.cloud.github.com/assets/1532071/2058566/ec64bf70-8b77-11e3-883f-82b41a83f6ac.png)
-
 
 ### Stock preset
 
@@ -229,4 +251,5 @@ MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 [10]: https://github.com/Shougo/neobundle.vim
 [11]: https://github.com/bling/vim-airline#tmuxline
 [12]: https://github.com/itchyny/lightline.vim
+[13]: http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
