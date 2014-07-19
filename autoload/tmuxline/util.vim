@@ -4,8 +4,9 @@
 
 let s:DEFAULT_COLOR = 'default'
 let s:DEFAULT_COLOR_AND_ATTRIBUTES = '#[default]'
-
-" TODO replace magic numbers 0,1,2 with FG,BG,ATTR
+let s:FG = 0
+let s:BG = 1
+let s:ATTR = 2
 
 fun! tmuxline#util#tmux_color_attr(fg, bg, attr)
   let fg = tmuxline#util#normalize_color(a:fg)
@@ -23,9 +24,9 @@ fun! tmuxline#util#normalize_color(color)
 endfun
 
 fun! tmuxline#util#normalize_color_definition(color_definition)
-  let fg   = a:color_definition[0]
-  let bg   = a:color_definition[1]
-  let attr = get(a:color_definition, 2, '')
+  let fg   = a:color_definition[s:FG]
+  let bg   = a:color_definition[s:BG]
+  let attr = get(a:color_definition, s:ATTR, '')
 
   return [ tmuxline#util#normalize_color(fg), tmuxline#util#normalize_color(bg), attr ]
 endfun
@@ -55,7 +56,7 @@ fun! tmuxline#util#get_color_from_theme(color_name, theme) abort
   endif
 
   let color_definition = tmuxline#util#get_color_definition_from_theme(a:color_name, a:theme)
-  let [fg, bg, attr] = color_definition[0:2]
+  let [fg, bg, attr] = color_definition[s:FG : s:ATTR]
 
   return tmuxline#util#tmux_color_attr(fg, bg, attr)
 endfun
@@ -134,15 +135,15 @@ endfun
 
 fun! tmuxline#util#create_theme_from_lightline(mode_palette)
   return {
-        \'a' : a:mode_palette.left[0][2:4],
-        \'b' : a:mode_palette.left[1][2:4],
-        \'c' : a:mode_palette.middle[0][2:4],
-        \'x' : a:mode_palette.middle[0][2:4],
-        \'y' : a:mode_palette.right[1][2:4],
-        \'z' : a:mode_palette.right[0][2:4],
-        \'bg' : a:mode_palette.middle[0][2:4],
-        \'cwin' : a:mode_palette.left[1][2:4],
-        \'win' : a:mode_palette.middle[0][2:4]}
+        \'a' : a:mode_palette.left[s:FG][2:4],
+        \'b' : a:mode_palette.left[s:BG][2:4],
+        \'c' : a:mode_palette.middle[s:FG][2:4],
+        \'x' : a:mode_palette.middle[s:FG][2:4],
+        \'y' : a:mode_palette.right[s:BG][2:4],
+        \'z' : a:mode_palette.right[s:FG][2:4],
+        \'bg' : a:mode_palette.middle[s:FG][2:4],
+        \'cwin' : a:mode_palette.left[s:BG][2:4],
+        \'win' : a:mode_palette.middle[s:FG][2:4]}
 endfun
 
 fun! tmuxline#util#create_theme_from_airline(mode_palette)
@@ -158,9 +159,9 @@ fun! tmuxline#util#create_theme_from_airline(mode_palette)
         \'win'  : a:mode_palette.airline_c[2:4]}
 
   " use background in 'a' section for windows with activity alert
-  let bg           = theme.bg[1]
-  let a_section_bg = theme.a[1]
-  let win_fg       = theme.win[0]
+  let bg           = theme.bg[s:BG]
+  let a_section_bg = theme.a[s:BG]
+  let win_fg       = theme.win[s:FG]
   " use the color only if it's different from the other windows and the background
   if a_section_bg != bg && a_section_bg != win_fg
     let theme['win.activity'] = [ a_section_bg, bg ]
