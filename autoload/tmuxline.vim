@@ -142,11 +142,11 @@ fun! tmuxline#get_statusline_config(line, theme, separators)
 endfun
 
 fun! tmuxline#get_global_config(line, theme)
-  let bg = tmuxline#util#normalize_color(a:theme.bg[1])
-  let message_bg = tmuxline#util#normalize_color(a:theme.cwin[1])
-  let message_fg = tmuxline#util#normalize_color(a:theme.cwin[0])
-  let pane_border = tmuxline#util#normalize_color(a:theme.b[1])
-  let pane_active_border = tmuxline#util#normalize_color(a:theme.a[1])
+  let bg                 = tmuxline#util#normalize_color(a:theme.bg[1])
+  let message_bg         = tmuxline#util#normalize_color(a:theme.cwin[1])
+  let message_fg         = tmuxline#util#normalize_color(a:theme.cwin[0])
+  let pane_border        = has_key(a:theme, 'pane',) ? tmuxline#util#normalize_color(a:theme.pane[0]) : tmuxline#util#normalize_color(a:theme.b[1])
+  let pane_active_border = has_key(a:theme, 'cpane',) ? tmuxline#util#normalize_color(a:theme.cpane[0]) : tmuxline#util#normalize_color(a:theme.a[1])
 
   let window = tmuxline#util#get_color_definition_from_theme('win', a:theme)
   let window_fg = window[0]
