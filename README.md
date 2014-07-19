@@ -58,6 +58,7 @@ Alternatively, you can set it manually using `airline_*` themes:
 ```
 
 If you set airline theme manually, make sure the [airline-tmuxline][11] extension  is disabled, so it doesn't overwrite the theme:
+
 `let g:airline#extensions#tmuxline#enabled = 0`
 
 ### lightline.vim
