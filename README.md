@@ -1,6 +1,6 @@
 # tmuxline.vim
 
-Simple tmux statusline generator with support for powerline symbols and airline integration
+Simple tmux statusline generator with support for powerline symbols and vim/airline/lightline statusline integration
 
 - colors from [vim-airline][7]/[lightline.vim][12]
 
