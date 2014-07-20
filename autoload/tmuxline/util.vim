@@ -133,6 +133,32 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
   return bar
 endfun
 
+fun! tmuxline#util#get_colors_from_vim_statusline()
+  let stl_fg         = synIDattr(hlID('StatusLine')  , 'fg')
+  let stl_bg         = synIDattr(hlID('StatusLine')  , 'bg')
+  let stl_reverse    = synIDattr(hlID('StatusLine')  , 'reverse')
+
+  let stl_nc_fg      = synIDattr(hlID('StatusLineNC'), 'fg')
+  let stl_nc_bg      = synIDattr(hlID('StatusLineNC'), 'bg')
+  let stl_nc_reverse = synIDattr(hlID('StatusLineNC'), 'reverse')
+
+  let stl_attr       = synIDattr(hlID('StatusLine')  , 'bold') ? 'bold' : ''
+  let stl_nc_attr    = synIDattr(hlID('StatusLineNC'), 'bold') ? 'bold' : ''
+
+  if stl_reverse
+    let [ stl_fg, stl_bg ] = [ stl_bg, stl_fg ]
+  endif
+  if stl_nc_reverse
+    let [ stl_nc_fg, stl_nc_bg ] = [ stl_nc_bg, stl_nc_fg ]
+  endif
+
+  return {
+        \'statusline'             : [ stl_fg,    stl_bg,    stl_attr    ],
+        \'statusline_nc'          : [ stl_nc_fg, stl_nc_bg, stl_nc_attr ],
+        \'reversed_statusline'    : [ stl_bg,    stl_fg,    stl_attr    ],
+        \'reversed_statusline_nc' : [ stl_nc_bg, stl_nc_fg, stl_nc_attr ]}
+endfun
+
 fun! tmuxline#util#create_theme_from_lightline(mode_palette)
   return {
         \'a' : a:mode_palette.left[s:FG][2:4],

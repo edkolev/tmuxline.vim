@@ -1,34 +1,16 @@
 
 function! tmuxline#themes#vim_statusline3#get()
-
-  let stl_fg         = synIDattr(hlID('StatusLine')  , 'fg')
-  let stl_bg         = synIDattr(hlID('StatusLine')  , 'bg')
-  let stl_reverse    = synIDattr(hlID('StatusLine')  , 'reverse')
-
-  let stl_nc_fg      = synIDattr(hlID('StatusLineNC'), 'fg')
-  let stl_nc_bg      = synIDattr(hlID('StatusLineNC'), 'bg')
-  let stl_nc_reverse = synIDattr(hlID('StatusLineNC'), 'reverse')
-
-  let stl_attr       = synIDattr(hlID('StatusLine')  , 'bold') ? 'bold' : ''
-  let stl_nc_attr    = synIDattr(hlID('StatusLineNC'), 'bold') ? 'bold' : ''
-
-  if stl_reverse
-    let [ stl_fg, stl_bg ] = [ stl_bg, stl_fg ]
-  endif
-  if stl_nc_reverse
-    let [ stl_nc_fg, stl_nc_bg ] = [ stl_nc_bg, stl_nc_fg ]
-  endif
-
+  let colors = tmuxline#util#get_colors_from_vim_statusline()
   return {
-        \ 'a'    : [ stl_bg   , stl_fg, stl_attr ],
-        \ 'b'    : [ stl_fg   , stl_bg, stl_attr ],
-        \ 'c'    : [ stl_nc_fg, stl_nc_bg, stl_nc_attr ],
-        \ 'x'    : [ stl_nc_fg, stl_nc_bg, stl_nc_attr ],
-        \ 'y'    : [ stl_fg   , stl_bg, stl_attr ],
-        \ 'z'    : [ stl_bg   , stl_fg, stl_attr ],
-        \ 'bg'   : [ stl_nc_fg, stl_nc_bg, stl_nc_attr ],
-        \ 'win'  : [ stl_nc_fg, stl_nc_bg, stl_nc_attr ],
-        \ 'cwin' : [ stl_fg   , stl_bg, stl_attr ],
-        \ 'pane' : [ stl_nc_bg, stl_nc_bg ],
-        \ 'cpane': [ stl_bg   , stl_bg ]}
+        \ 'a'    : colors.reversed_statusline ,
+        \ 'b'    : colors.statusline ,
+        \ 'c'    : colors.statusline_nc ,
+        \ 'x'    : colors.statusline_nc ,
+        \ 'y'    : colors.statusline ,
+        \ 'z'    : colors.reversed_statusline ,
+        \ 'bg'   : colors.statusline_nc ,
+        \ 'win'  : colors.statusline_nc ,
+        \ 'cwin' : colors.statusline ,
+        \ 'pane' : colors.reversed_statusline_nc ,
+        \ 'cpane': colors.reversed_statusline }
 endfunc
