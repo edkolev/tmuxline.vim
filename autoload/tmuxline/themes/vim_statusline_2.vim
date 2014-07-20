@@ -1,5 +1,5 @@
 
-function! tmuxline#themes#vim_statusline2#get()
+function! tmuxline#themes#vim_statusline_2#get()
   let colors = tmuxline#util#get_colors_from_vim_statusline()
   return {
         \ 'a'    : colors.statusline,
