@@ -1,5 +1,5 @@
 
-function! tmuxline#themes#vim_statusline#get()
+function! tmuxline#themes#vim_statusline3#get()
 
   let stl_fg         = synIDattr(hlID('StatusLine')  , 'fg')
   let stl_bg         = synIDattr(hlID('StatusLine')  , 'bg')
