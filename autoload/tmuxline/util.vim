@@ -133,7 +133,7 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
   return bar
 endfun
 
-fun! tmuxline#util#get_colors_from_vim_statusline()
+fun! tmuxline#util#get_colors_from_vim_statusline() abort
   let stl_fg         = synIDattr(hlID('StatusLine')  , 'fg')
   let stl_bg         = synIDattr(hlID('StatusLine')  , 'bg')
   let stl_reverse    = synIDattr(hlID('StatusLine')  , 'reverse')
@@ -144,6 +144,10 @@ fun! tmuxline#util#get_colors_from_vim_statusline()
 
   let stl_attr       = synIDattr(hlID('StatusLine')  , 'bold') ? 'bold' : ''
   let stl_nc_attr    = synIDattr(hlID('StatusLineNC'), 'bold') ? 'bold' : ''
+
+  if stl_fg == -1 || stl_bg == -1 || stl_nc_fg == -1 || stl_nc_bg == -1
+    throw "tmuxline: Can't load theme, vim's colorscheme doesn't define StatusLine/StatusLineNC highlight groups"
+  endif
 
   if stl_reverse
     let [ stl_fg, stl_bg ] = [ stl_bg, stl_fg ]
