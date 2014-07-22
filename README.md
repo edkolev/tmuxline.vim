@@ -54,7 +54,7 @@ To use vim statusline colors in tmux, use one of the `vim_statusline*` themes:
 :Tmuxline vim_statusline3
 ```
 
-To disable powerline separators (on by default):
+To disable powerline separators (enabled by default):
 
 `let g:tmuxline_powerline_separators = 0`
 
