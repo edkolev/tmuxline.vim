@@ -35,6 +35,8 @@ To disable powerline separators (enabled by default), set in vimrc:
 
 `let g:tmuxline_powerline_separators = 0`
 
+![img](https://cloud.githubusercontent.com/assets/1532071/3787457/dc6ef76c-1a19-11e4-8d77-964e7db87337.png)
+
 #### use vim-airline colors
 
 Just start vim inside of tmux. airline's colors will be applied to tmux's statusline
