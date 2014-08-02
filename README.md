@@ -21,7 +21,7 @@ Simple tmux statusline generator with support for powerline symbols and vim/airl
 
 #### use vim's statusline colors
 
-To use vim statusline colors in tmux, use one of the `vim_statusline_*` themes:
+Use one of the `vim_statusline_*` themes (and optionally set in vimrc `let g:tmuxline_powerline_separators = 0`):
 
 ```
 :Tmuxline vim_statusline_1
@@ -30,10 +30,6 @@ To use vim statusline colors in tmux, use one of the `vim_statusline_*` themes:
 " or
 :Tmuxline vim_statusline_3
 ```
-
-To disable powerline separators (enabled by default), set in vimrc:
-
-`let g:tmuxline_powerline_separators = 0`
 
 ![img](https://cloud.githubusercontent.com/assets/1532071/3787457/dc6ef76c-1a19-11e4-8d77-964e7db87337.png)
 
