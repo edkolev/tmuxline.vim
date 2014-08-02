@@ -72,7 +72,7 @@ Set a a colortheme and a preset, both arguments are optional
 :Tmuxline [theme] [preset]
 ```
 
-After running :Tmuxline, create a snapshot file which can be sourced by tmux.conf
+After running :Tmuxline, create a snapshot file which can be sourced by tmux.conf on startup
 ```
 :TmuxlineSnapshot [file]
 ```
