@@ -164,7 +164,7 @@ fun! tmuxline#util#get_colors_from_vim_statusline() abort
 endfun
 
 fun! tmuxline#util#create_theme_from_lightline(mode_palette)
-  return {
+  let theme = {
         \'a' : a:mode_palette.left[s:FG][2:4],
         \'b' : a:mode_palette.left[s:BG][2:4],
         \'c' : a:mode_palette.middle[s:FG][2:4],
@@ -174,6 +174,8 @@ fun! tmuxline#util#create_theme_from_lightline(mode_palette)
         \'bg' : a:mode_palette.middle[s:FG][2:4],
         \'cwin' : a:mode_palette.left[s:BG][2:4],
         \'win' : a:mode_palette.middle[s:FG][2:4]}
+  call tmuxline#util#try_guess_activity_color( theme )
+  return theme
 endfun
 
 fun! tmuxline#util#create_theme_from_airline(mode_palette)
@@ -187,15 +189,19 @@ fun! tmuxline#util#create_theme_from_airline(mode_palette)
         \'bg'   : a:mode_palette.airline_c[2:4],
         \'cwin' : a:mode_palette.airline_b[2:4],
         \'win'  : a:mode_palette.airline_c[2:4]}
+  call tmuxline#util#try_guess_activity_color( theme )
+  return theme
+endfun
 
-  " use background in 'a' section for windows with activity alert
-  let bg           = theme.bg[s:BG]
-  let a_section_bg = theme.a[s:BG]
-  let win_fg       = theme.win[s:FG]
-  " use the color only if it's different from the other windows and the background
+" use background in 'a' section for windows with activity alert
+" but use the color only if it's different from the other windows and the background
+fun! tmuxline#util#try_guess_activity_color(theme)
+  let bg           = a:theme.bg[s:BG]
+  let a_section_bg = a:theme.a[s:BG]
+  let win_fg       = a:theme.win[s:FG]
   if a_section_bg != bg && a_section_bg != win_fg
-    let theme['win.activity'] = [ a_section_bg, bg ]
+    let a:theme['win.activity'] = [ a_section_bg, bg, 'none' ]
   endif
 
-  return theme
+  return a:theme
 endfun
