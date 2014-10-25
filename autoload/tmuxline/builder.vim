@@ -43,11 +43,12 @@ fun! s:builder.build(theme, separators) abort
             let pending_separator = ''
         endif
         if type == s:TEXT
+            let preceeding_space = matchend(line, ' $') > 0 ? '' : space
             if last_style == style
-                let line .= space . text . space
+                let line .= preceeding_space . text . space
             elseif len(text) > 0
                 let color = tmuxline#util#get_color_from_theme(style, a:theme)
-                let line .= color . space . text . space
+                let line .= color . preceeding_space . text . space
             endif
         elseif type == s:LEFT_ALT_SEP
             let line .= a:separators.left_alt
