@@ -5,13 +5,13 @@ fun! tmuxline#presets#minimal#get()
   " status-left #S
   " winwows #I #W
 
-  let bar = tmuxline#util#create_line_from_hash({
+  return tmuxline#util#create_line_from_hash({
         \ 'a': '#S',
         \ 'win': '#I #W',
         \ 'cwin': '#I #W',
         \ 'z': '%R',
         \ 'options': {
-          \'status-justify': 'left'}
+        \'status-justify': 'left'}
         \})
 
   return bar
