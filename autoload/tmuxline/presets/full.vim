@@ -1,4 +1,3 @@
-
 fun! tmuxline#presets#full#get()
   return tmuxline#util#create_line_from_hash({
         \ 'a': '#S',
