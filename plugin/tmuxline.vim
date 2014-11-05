@@ -3,6 +3,7 @@
 " Copyright (c) 2013-2014 Evgeni Kolev
 
 if !strlen($TMUX) || !executable('tmux')
+  command! -nargs=* Tmuxline echoerr ":Tmuxline should be executed in a tmux sesssion"
   finish
 endif
 
