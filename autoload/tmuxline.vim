@@ -160,6 +160,7 @@ fun! tmuxline#get_global_config(line, theme)
   let window_activity_fg = window_activity[0]
   let window_activity_bg = window_activity[1]
   let window_activity_attr = len(window_activity[2]) ? window_activity[2] : 'none'
+  let justify = get(g:, 'tmuxline_justify', 'centre')
 
   let misc_options = {
         \ 'status-bg'                   : bg,
@@ -169,7 +170,7 @@ fun! tmuxline#get_global_config(line, theme)
         \ 'message-command-bg'          : message_bg,
         \ 'pane-border-fg'              : pane_border,
         \ 'pane-active-border-fg'       : pane_active_border,
-        \ 'status-justify'               : 'centre',
+        \ 'status-justify'               : justify,
         \ 'status-left-length'           : 100,
         \ 'status-right-length'          : 100,
         \ 'status'                       : 'on',
