@@ -177,7 +177,7 @@ let g:tmuxline_separators = {
 
 ### Theme
 
-Note that [vim-airline][2] has a [tmuxline extenstion][11] which by default sets airline's color theme onto tmuxline.
+Note that [vim-airline][2] has a [tmuxline extension][11] which by default sets airline's color theme onto tmuxline.
 If you don't want airline colors in tmuxline, set `let g:airline#extensions#tmuxline#enabled = 0` in vimrc.
 
 Modifying `g:tmuxline_theme` (details below) makes sense only if the airline-tmuxline is not enabled.
