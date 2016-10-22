@@ -34,7 +34,7 @@ Commands will be available if vim is inside tmux and tmux is in PATH
 CONFIGURATION                                       *tmuxline-configuration*
 
 * enable/disable usage of powerline symbols for separators (default on) >
-  g:tmuxline_powerline_separators = 0
+  let g:tmuxline_powerline_separators = 0
 <
 * configure the preset used in the statusline. Can be a "string" holding the
   name of the preset, or a hash {} holding fine-tuned configuration. The hash
@@ -78,6 +78,11 @@ CONFIGURATION                                       *tmuxline-configuration*
       \ 'right' : '',
       \ 'right_alt' : '<',
       \ 'space' : ' '}
+<
+* configure the alignment of the tmux window list; maps to the tmux command
+  'set -g status-justify'. Values are 'left', 'centre', or 'right'
+  Default is 'centre' >
+  let g:tmuxline_status_justify = 'left'
 <
 ==============================================================================
 API                                                           *tmuxline-api*
