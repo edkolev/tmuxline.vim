@@ -175,8 +175,7 @@ fun! tmuxline#get_global_config(line, theme)
         \ 'status'                       : 'on',
         \ 'status-right-attr'           : 'none',
         \ 'status-left-attr'            : 'none',
-        \ 'status-attr'                 : 'none',
-        \ 'status-utf8'                  : 'on'}
+        \ 'status-attr'                 : 'none'}
   let win_options = {
         \ 'window-status-fg'            : window_fg,
         \ 'window-status-bg'            : window_bg,
