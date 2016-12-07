@@ -51,6 +51,45 @@ fun! tmuxline#set_statusline(...) abort
   endtry
 endfun
 
+fun! tmuxline#set_statusline_simple(...) abort
+  let colors = tmuxline#util#get_colors_from_vim_statusline()
+
+  let variant = empty(a:000) ? '1' : a:1
+
+  if (variant == 1)
+    let [fg, bg, attr]                = colors.statusline_nc
+    let [curr_fg, curr_bg, curr_attr] = colors.statusline
+  elseif (variant == 2)
+    let [fg, bg, attr]                = colors.statusline
+    let [curr_fg, curr_bg, curr_attr] = colors.statusline_nc
+  elseif (variant == 3)
+    let fg = colors.statusline[0]
+    let bg = colors.statusline[1]
+    let attr = ''
+    let curr_fg = colors.statusline[0]
+    let curr_bg = colors.statusline[1]
+    let curr_attr = 'reverse'
+  elseif (variant == 4)
+    let [fg, bg, attr]                = colors.statusline_nc
+    let [curr_fg, curr_bg, curr_attr] = colors.statusline_nc
+  else
+    echohl ErrorMsg | echomsg "tmuxline: invalid variant" | echohl None
+  endif
+
+  let attr = len(attr) ? ',' . attr : attr
+  let curr_attr = len(curr_attr) ? ',' . curr_attr : curr_attr
+
+  let line_settings = [
+        \ 'set -g status-style fg=colour' . fg . ',bg=colour' . bg . attr,
+        \ 'set -g window-status-current-style fg=colour' . curr_fg . ',bg=colour' . curr_bg . curr_attr]
+
+  try
+    call tmuxline#apply(line_settings)
+  catch /^tmuxline:/
+    echohl ErrorMsg | echomsg v:exception | echohl None
+  endtry
+endfun
+
 fun! tmuxline#set_statusline_theme_and_preset(theme, preset)
   let line = tmuxline#load_line(a:preset)
   let colors = tmuxline#load_colors(a:theme)
