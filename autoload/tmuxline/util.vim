@@ -165,15 +165,15 @@ endfun
 
 fun! tmuxline#util#create_theme_from_lightline(mode_palette)
   let theme = {
-        \'a' : a:mode_palette.left[s:FG][2:4],
-        \'b' : a:mode_palette.left[s:BG][2:4],
-        \'c' : a:mode_palette.middle[s:FG][2:4],
-        \'x' : a:mode_palette.middle[s:FG][2:4],
-        \'y' : a:mode_palette.right[s:BG][2:4],
-        \'z' : a:mode_palette.right[s:FG][2:4],
-        \'bg' : a:mode_palette.middle[s:FG][2:4],
+        \'a'    : a:mode_palette.left[s:FG][2:4],
+        \'b'    : a:mode_palette.left[s:BG][2:4],
+        \'c'    : a:mode_palette.middle[s:FG][2:4],
+        \'x'    : a:mode_palette.middle[s:FG][2:4],
+        \'y'    : a:mode_palette.right[s:BG][2:4],
+        \'z'    : a:mode_palette.right[s:FG][2:4],
+        \'bg'   : a:mode_palette.middle[s:FG][2:4],
         \'cwin' : a:mode_palette.left[s:BG][2:4],
-        \'win' : a:mode_palette.middle[s:FG][2:4]}
+        \'win'  : a:mode_palette.middle[s:FG][2:4]}
   call tmuxline#util#try_guess_activity_color( theme )
   return theme
 endfun
@@ -187,8 +187,8 @@ fun! tmuxline#util#create_theme_from_airline(mode_palette)
         \'y'    : a:mode_palette.airline_y[2:4],
         \'z'    : a:mode_palette.airline_z[2:4],
         \'bg'   : a:mode_palette.airline_c[2:4],
-        \'cwin' : a:mode_palette.airline_b[2:4],
-        \'win'  : a:mode_palette.airline_c[2:4]}
+        \'cwin' : a:mode_palette.airline_c[2:4],
+        \'win'  : a:mode_palette.airline_b[2:4]}
   call tmuxline#util#try_guess_activity_color( theme )
   return theme
 endfun
