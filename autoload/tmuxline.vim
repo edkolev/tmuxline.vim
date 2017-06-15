@@ -4,6 +4,7 @@
 
 let s:default_theme = 'powerline'
 let s:default_preset = 'powerline'
+let s:default_status_justify = 'centre'
 
 let s:powerline_separators = {
     \ 'left' : '',
@@ -186,6 +187,7 @@ fun! tmuxline#get_global_config(line, theme)
   let message_fg         = tmuxline#util#normalize_color(a:theme.cwin[0])
   let pane_border        = has_key(a:theme, 'pane',) ? tmuxline#util#normalize_color(a:theme.pane[0]) : tmuxline#util#normalize_color(a:theme.b[1])
   let pane_active_border = has_key(a:theme, 'cpane',) ? tmuxline#util#normalize_color(a:theme.cpane[0]) : tmuxline#util#normalize_color(a:theme.a[1])
+  let status_justify     = get(g:, 'tmuxline_status_justify', s:default_status_justify)
 
   let window = tmuxline#util#get_color_definition_from_theme('win', a:theme)
   let window_fg = window[0]
@@ -208,7 +210,7 @@ fun! tmuxline#get_global_config(line, theme)
         \ 'message-command-bg'          : message_bg,
         \ 'pane-border-fg'              : pane_border,
         \ 'pane-active-border-fg'       : pane_active_border,
-        \ 'status-justify'               : 'centre',
+        \ 'status-justify'               : status_justify,
         \ 'status-left-length'           : 100,
         \ 'status-right-length'          : 100,
         \ 'status'                       : 'on',
