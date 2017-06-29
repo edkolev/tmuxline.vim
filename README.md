@@ -151,7 +151,7 @@ tmux allows using any command in the statusline.
 ```
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime | cud -d " " -f 1,2,3)'],
+      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W', '#F'],
       \'x'    : '#(date)',
