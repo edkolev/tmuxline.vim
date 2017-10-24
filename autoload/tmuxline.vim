@@ -127,7 +127,7 @@ fun! tmuxline#apply(line_settings) abort
   let temp_file = tempname()
   try
     call writefile(a:line_settings, temp_file)
-    call system("tmux source " . tmuxline#util#wrap_in_quotes(temp_file))
+    call system("tmux source " . tmuxline#util#wrap_in_quotes(temp_file) . " | cat")
   finally
     call delete(temp_file)
   endtry
