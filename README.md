@@ -219,6 +219,7 @@ The plugin's files follow the standard layout for vim plugins.
 - [Pathogen][8] `git clone https://github.com/edkolev/tmuxline.vim ~/.vim/bundle/tmuxline.vim`
 - [Vundle][9] `Bundle 'edkolev/tmuxline.vim'`
 - [NeoBundle][10] `NeoBundle 'edkolev/tmuxline.vim'`
+- [Vim-Plug][14] `Plug 'edkolev/tmuxline.vim'`
 
 ## Inspired by
 
@@ -232,14 +233,14 @@ Vimscript wasn't my first choice of language for this plugin. Arguably, bash wou
 - vim has (better) package managers
 
 Somewhat-similar plugins:
-- [powerline][3] is a great project. Still, my [Raspberri Pi][5] chokes while executing python every [2 seconds][6] (I haven't tried powerline's daemon mode). I also find it a bit hard to personalize
+- [powerline][3] is a great project. Still, my [Raspberry Pi][5] chokes while executing python every [2 seconds][6] (I haven't tried powerline's daemon mode). I also find it a bit hard to personalize
 - [tmux-powerline][4] doesn't focus on easy customization but on adding extra information (segments) in tmux (gmail, weather, earthquake warnings, etc)
 
 ## License
 
 MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 
-[1]: http://paulrouget.com/e/myconf/
+[1]: http://paulrouget.com/e/myconf
 [2]: https://github.com/bling/vim-airline
 [3]: https://github.com/Lokaltog/powerline
 [4]: https://github.com/erikw/tmux-powerline
@@ -252,4 +253,5 @@ MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 [11]: https://github.com/bling/vim-airline#tmuxline
 [12]: https://github.com/itchyny/lightline.vim
 [13]: http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
+[14]: https://github.com/junegunn/vim-plug
 
