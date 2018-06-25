@@ -13,6 +13,4 @@ fun! tmuxline#presets#minimal#get()
         \ 'options': {
         \'status-justify': 'left'}
         \})
-
-  return bar
 endfun
