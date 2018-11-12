@@ -179,7 +179,7 @@ fun! tmuxline#util#create_theme_from_lightline(mode_palette)
 endfun
 
 fun! tmuxline#util#create_theme_from_airline(mode_palette)
-  if &termguicolors
+  if exists("+termguicolors") && &termguicolors
     let theme = {
           \'a'    : [a:mode_palette.airline_a[0], a:mode_palette.airline_a[1], a:mode_palette.airline_a[4]],
           \'b'    : [a:mode_palette.airline_b[0], a:mode_palette.airline_b[1], a:mode_palette.airline_b[4]],
