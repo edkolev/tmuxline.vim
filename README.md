@@ -185,7 +185,7 @@ Modifying `g:tmuxline_theme` (details below) makes sense only if the airline-tmu
 Use `g:tmuxline_theme` to configure the theme. `g:tmuxline_theme` can hold either a string (stock theme) or a hash (custom theme).
 
 ```
-let g:tmuxline_theme = 'icebert'
+let g:tmuxline_theme = 'iceberg'
 " or
 let g:tmuxline_theme = 'zenburn'
 " or
