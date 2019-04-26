@@ -163,18 +163,25 @@ fun! tmuxline#util#get_colors_from_vim_statusline() abort
         \'reversed_statusline_nc' : [ stl_nc_bg, stl_nc_fg, stl_nc_attr ]}
 endfun
 
+fun! tmuxline#util#create_theme_from_lightline_help(arr)
+    if len(a:arr)==5
+        return a:arr[4]
+    else
+        return ''
+    endif
+endfun
 fun! tmuxline#util#create_theme_from_lightline(mode_palette)
   if exists("+termguicolors") && &termguicolors
     let theme = {
-          \'a' : a:mode_palette.left[s:FG][0:1],
-          \'b' : a:mode_palette.left[s:BG][0:1],
-          \'c' : a:mode_palette.middle[s:FG][0:1],
-          \'x' : a:mode_palette.middle[s:FG][0:1],
-          \'y' : a:mode_palette.right[s:BG][0:1],
-          \'z' : a:mode_palette.right[s:FG][0:1],
-          \'bg' : a:mode_palette.middle[s:FG][0:1],
-          \'cwin' : a:mode_palette.left[s:BG][0:1],
-          \'win' : a:mode_palette.middle[s:FG][0:1]}
+          \'a' : [a:mode_palette.left[s:FG][0], a:mode_palette.left[s:FG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.left[s:FG])],
+          \'b' : [a:mode_palette.left[s:BG][0], a:mode_palette.left[s:BG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.left[s:BG])],
+          \'c' : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.middle[s:FG])],
+          \'x' : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.middle[s:FG])],
+          \'y' : [a:mode_palette.right[s:BG][0], a:mode_palette.right[s:BG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.right[s:BG])],
+          \'z' : [a:mode_palette.right[s:FG][0], a:mode_palette.right[s:FG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.right[s:FG])],
+          \'bg' : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.middle[s:FG])],
+          \'cwin' : [a:mode_palette.left[s:BG][0], a:mode_palette.left[s:BG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.left[s:BG])],
+          \'win' : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], tmuxline#util#create_theme_from_lightline_help(a:mode_palette.middle[s:FG])]}
   else
     let theme = {
           \'a' : a:mode_palette.left[s:FG][2:4],
