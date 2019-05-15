@@ -209,7 +209,7 @@ let g:tmuxline_theme = {
     \ }
 " values represent: [ FG, BG, ATTR ]
 "   FG ang BG are color codes
-"   ATTR (optional) is a comme-delimited string of one or more of bold, dim, underscore, etc. For details refer to 'message-attr attributes' in tmux man page
+"   ATTR (optional) is a comma-delimited string of one or more of bold, dim, underscore, etc. For details refer to the STYLE section in the tmux man page
 ```
 
 ## Installation
