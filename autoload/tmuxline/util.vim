@@ -117,10 +117,10 @@ fun! tmuxline#util#create_line_from_hash(hash) abort
   endfor
 
   for key in filter(['win'], 'has_key(hash, v:val)')
-    let parts_code = map(copy(hash[key]), '"call bar.win.add(\"" . s:DEFAULT_COLOR . "\", \"" . v:val . "\")"')
-    exec 'call bar.win.add_' . win_sep_type . '_sep() | call bar.win.add(key, "")'
+    let parts_code = map(copy(hash[key]), '"call bar.win.add(\"" . key . "\", \"" . v:val . "\")"')
+    exec 'call bar.win.add_' . win_sep_type . '_sep()'
     exec join(parts_code, '| call bar.win.add_' . win_sep_type . '_alt_sep() |')
-    exec 'call bar.win.add(key, "") | call bar.win.add_' . win_sep_type . '_sep()'
+    exec 'call bar.win.add_' . win_sep_type . '_sep()'
   endfor
 
   for key in filter(['cwin'], 'has_key(hash, v:val)')
