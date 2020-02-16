@@ -30,6 +30,9 @@ Commands will be available if vim is inside tmux and tmux is in PATH
   after |tmuxline| has set tmux's statusline, i.e. after executing
   |:Tmuxline|. The file will not be overwritten unless bang [!] is given.
 
+  If the argument is "-", the snapshot configuration will be inserted to the
+  current buffer beneath the cursor rather than written to an actual file.
+
 ==============================================================================
 CONFIGURATION                                       *tmuxline-configuration*
 
