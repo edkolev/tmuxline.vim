@@ -208,7 +208,6 @@ fun! tmuxline#get_global_config(line, theme)
         \ 'message-bg'                  : message_bg,
         \ 'message-command-fg'          : message_fg,
         \ 'message-command-bg'          : message_bg,
-        \ 'pane-border-fg'              : pane_border,
         \ 'pane-active-border-fg'       : pane_active_border,
         \ 'status-justify'               : status_justify,
         \ 'status-left-length'           : 100,
