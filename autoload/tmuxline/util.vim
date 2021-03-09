@@ -164,16 +164,29 @@ fun! tmuxline#util#get_colors_from_vim_statusline() abort
 endfun
 
 fun! tmuxline#util#create_theme_from_lightline(mode_palette)
-  let theme = {
-        \'a' : a:mode_palette.left[s:FG][2:4],
-        \'b' : a:mode_palette.left[s:BG][2:4],
-        \'c' : a:mode_palette.middle[s:FG][2:4],
-        \'x' : a:mode_palette.middle[s:FG][2:4],
-        \'y' : a:mode_palette.right[s:BG][2:4],
-        \'z' : a:mode_palette.right[s:FG][2:4],
-        \'bg' : a:mode_palette.middle[s:FG][2:4],
-        \'cwin' : a:mode_palette.left[s:BG][2:4],
-        \'win' : a:mode_palette.middle[s:FG][2:4]}
+  if exists("+termguicolors") && &termguicolors
+    let theme = {
+          \'a'    : [a:mode_palette.left[s:FG][0], a:mode_palette.left[s:FG][1], a:mode_palette.left[s:FG][4]],
+          \'b'    : [a:mode_palette.left[s:BG][0], a:mode_palette.left[s:BG][1], ''],
+          \'c'    : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], ''],
+          \'x'    : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], ''],
+          \'y'    : [a:mode_palette.right[s:BG][0], a:mode_palette.right[s:BG][1], ''],
+          \'z'    : [a:mode_palette.right[s:FG][0], a:mode_palette.right[s:FG][1], a:mode_palette.right[s:FG][4]],
+          \'bg'   : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], ''],
+          \'cwin' : [a:mode_palette.left[s:BG][0], a:mode_palette.left[s:BG][1], ''],
+          \'win'  : [a:mode_palette.middle[s:FG][0], a:mode_palette.middle[s:FG][1], '']}
+  else
+    let theme = {
+          \'a' : a:mode_palette.left[s:FG][2:4],
+          \'b' : a:mode_palette.left[s:BG][2:4],
+          \'c' : a:mode_palette.middle[s:FG][2:4],
+          \'x' : a:mode_palette.middle[s:FG][2:4],
+          \'y' : a:mode_palette.right[s:BG][2:4],
+          \'z' : a:mode_palette.right[s:FG][2:4],
+          \'bg' : a:mode_palette.middle[s:FG][2:4],
+          \'cwin' : a:mode_palette.left[s:BG][2:4],
+          \'win' : a:mode_palette.middle[s:FG][2:4]}
+  endif
   call tmuxline#util#try_guess_activity_color( theme )
   return theme
 endfun
