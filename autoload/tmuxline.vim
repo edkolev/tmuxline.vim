@@ -136,13 +136,24 @@ fun! tmuxline#apply(line_settings) abort
 endfun
 
 fun! tmuxline#snapshot(file, overwrite) abort
-  let file = fnamemodify(a:file, ":p")
-  let dir = fnamemodify(file, ':h')
-
   if (len(s:snapshot) == 0)
     echohl ErrorMsg | echomsg ":Tmuxline should be executed before :TmuxlineSnapshot" | echohl None
     return
   endif
+
+  let lines = []
+  let lines += [ '# This tmux statusbar config was created by tmuxline.vim']
+  let lines += [ '# on ' . strftime("%a, %d %b %Y") ]
+  let lines += [ '' ]
+  let lines += s:snapshot
+
+  if (a:file == "-")
+      put =lines
+      return
+  endif
+
+  let file = fnamemodify(a:file, ":p")
+  let dir = fnamemodify(file, ':h')
 
   if empty(file)
     throw "Bad file name: \"" . file . "\""
@@ -152,12 +163,6 @@ fun! tmuxline#snapshot(file, overwrite) abort
     echohl ErrorMsg | echomsg "File exists (add ! to override)" | echohl None
     return
   endif
-
-  let lines = []
-  let lines += [ '# This tmux statusbar config was created by tmuxline.vim']
-  let lines += [ '# on ' . strftime("%a, %d %b %Y") ]
-  let lines += [ '' ]
-  let lines += s:snapshot
 
   call writefile(lines, file)
 endfun
