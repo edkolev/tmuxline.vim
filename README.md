@@ -67,7 +67,7 @@ Use one of the `lightline_*` themes:
 
 ## Usage
 
-Set a a colortheme and a preset, both arguments are optional
+Set a colortheme and a preset, both arguments are optional
 ```
 :Tmuxline [theme] [preset]
 ```
