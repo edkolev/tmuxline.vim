@@ -83,7 +83,11 @@ fun! tmuxline#util#load_line_from_preset(preset_name) abort
   try
     let line = tmuxline#presets#{a:preset_name}#get()
   catch /^Vim(let):E117: Unknown function: tmuxline#presets#.*#get/
-    throw "tmuxline: Preset cannot be found '" . a:preset_name . "'"
+    try
+      let line = {a:preset_name}()
+    catch /^Vim(let):E117: Unknown function: .*/
+      throw "tmuxline: Preset cannot be found '" . a:preset_name . "'"
+    endtry
   endtry
   return line
 endfun
