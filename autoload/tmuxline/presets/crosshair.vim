@@ -20,7 +20,7 @@ fun! tmuxline#presets#crosshair#get()
   call bar.cwin.add_right_sep()
 
   let bar.options['status-justify'] = 'centre'
-  let bar.win_options['window-status-activity-attr'] = 'none'
+  let bar.win_options['window-status-activity-style'] = 'none'
   let bar.win_options['window-status-separator'] = ' '
 
   return bar

@@ -151,7 +151,7 @@ tmux allows using any command in the statusline.
 ```
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime | cud -d " " -f 1,2,3)'],
+      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W', '#F'],
       \'x'    : '#(date)',
@@ -177,7 +177,7 @@ let g:tmuxline_separators = {
 
 ### Theme
 
-Note that [vim-airline][2] has a [tmuxline extenstion][11] which by default sets airline's color theme onto tmuxline.
+Note that [vim-airline][2] has a [tmuxline extension][11] which by default sets airline's color theme onto tmuxline.
 If you don't want airline colors in tmuxline, set `let g:airline#extensions#tmuxline#enabled = 0` in vimrc.
 
 Modifying `g:tmuxline_theme` (details below) makes sense only if the airline-tmuxline is not enabled.
@@ -185,7 +185,7 @@ Modifying `g:tmuxline_theme` (details below) makes sense only if the airline-tmu
 Use `g:tmuxline_theme` to configure the theme. `g:tmuxline_theme` can hold either a string (stock theme) or a hash (custom theme).
 
 ```
-let g:tmuxline_theme = 'icebert'
+let g:tmuxline_theme = 'iceberg'
 " or
 let g:tmuxline_theme = 'zenburn'
 " or
@@ -202,14 +202,14 @@ let g:tmuxline_theme = {
     \   'c'    : [ 244, 236 ],
     \   'x'    : [ 244, 236 ],
     \   'y'    : [ 253, 239 ],
-    \   'z'    : [ 236, 103 ]
+    \   'z'    : [ 236, 103 ],
     \   'win'  : [ 103, 236 ],
     \   'cwin' : [ 236, 103 ],
     \   'bg'   : [ 244, 236 ],
     \ }
 " values represent: [ FG, BG, ATTR ]
 "   FG ang BG are color codes
-"   ATTR (optional) is a comme-delimited string of one or more of bold, dim, underscore, etc. For details refer to 'message-attr attributes' in tmux man page
+"   ATTR (optional) is a comma-delimited string of one or more of bold, dim, underscore, etc. For details refer to the STYLE section in the tmux man page
 ```
 
 ## Installation
@@ -219,6 +219,7 @@ The plugin's files follow the standard layout for vim plugins.
 - [Pathogen][8] `git clone https://github.com/edkolev/tmuxline.vim ~/.vim/bundle/tmuxline.vim`
 - [Vundle][9] `Bundle 'edkolev/tmuxline.vim'`
 - [NeoBundle][10] `NeoBundle 'edkolev/tmuxline.vim'`
+- [Vim-Plug][14] `Plug 'edkolev/tmuxline.vim'`
 
 ## Inspired by
 
@@ -232,14 +233,14 @@ Vimscript wasn't my first choice of language for this plugin. Arguably, bash wou
 - vim has (better) package managers
 
 Somewhat-similar plugins:
-- [powerline][3] is a great project. Still, my [Raspberri Pi][5] chokes while executing python every [2 seconds][6] (I haven't tried powerline's daemon mode). I also find it a bit hard to personalize
+- [powerline][3] is a great project. Still, my [Raspberry Pi][5] chokes while executing python every [2 seconds][6] (I haven't tried powerline's daemon mode). I also find it a bit hard to personalize
 - [tmux-powerline][4] doesn't focus on easy customization but on adding extra information (segments) in tmux (gmail, weather, earthquake warnings, etc)
 
 ## License
 
 MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 
-[1]: http://paulrouget.com/e/myconf/
+[1]: http://paulrouget.com/e/myconf
 [2]: https://github.com/bling/vim-airline
 [3]: https://github.com/Lokaltog/powerline
 [4]: https://github.com/erikw/tmux-powerline
@@ -252,4 +253,5 @@ MIT License. Copyright (c) 2013-2014 Evgeni Kolev.
 [11]: https://github.com/bling/vim-airline#tmuxline
 [12]: https://github.com/itchyny/lightline.vim
 [13]: http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
+[14]: https://github.com/junegunn/vim-plug
 

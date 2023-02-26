@@ -5,7 +5,7 @@ fun! tmuxline#presets#tmux#get()
   " status-left [#S]
   " windows #I:#W#F
 
-  let bar = tmuxline#util#create_line_from_hash({
+  return tmuxline#util#create_line_from_hash({
         \ 'a': '[#S]',
         \ 'win': '#I:#W#F',
         \ 'cwin': '#I:#W#F',
@@ -13,6 +13,4 @@ fun! tmuxline#presets#tmux#get()
         \ 'options': {
         \'status-justify': 'left'}
         \})
-
-  return bar
 endfun

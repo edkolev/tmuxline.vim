@@ -8,6 +8,4 @@ fun! tmuxline#presets#full#get()
         \ 'x': '%a',
         \ 'y': ['%b %d', '%R'],
         \ 'z': '#H'})
-
-    return bar
 endfun
