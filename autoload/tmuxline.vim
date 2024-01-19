@@ -163,6 +163,12 @@ fun! tmuxline#snapshot(file, overwrite) abort
 endfun
 
 fun! tmuxline#get_line_settings(line, theme, separators) abort
+  for color in values(a:theme)
+    if color[2] == 'italic'
+      let color[2] = 'italics'
+    endif
+  endfor
+
   let statusline_config = tmuxline#get_statusline_config(a:line, a:theme, a:separators)
   let general_config = tmuxline#get_global_config(a:line, a:theme)
   return general_config + statusline_config
